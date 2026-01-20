@@ -3,117 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Charge | Leading EV Charging Solution</title>
+    <title>Echarging New Energy | Global EV Charging Solution Provider</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        /* 基础样式 - 这里的颜色参考了优优绿能的科技蓝 */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; line-height: 1.6; color: #333; }
-        header { background: #002b5e; color: white; padding: 1rem 5%; position: sticky; top: 0; z-index: 1000; }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #00d4ff; }
+        /* 基础设置 */
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; overflow-x: hidden; }
+        
+        /* 导航栏 */
+        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        
+        /* Logo 样式：半透明白色背景 */
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { 
+            height: 45px; 
+            width: auto; 
+            display: block;
+            background: rgba(255, 255, 255, 0.8); 
+            padding: 5px 12px; 
+            border-radius: 6px; 
+        }
 
-        /* 导航菜单样式 */
-        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-        .nav-links > li { position: relative; padding: 10px 20px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .nav-links a:hover { color: #00d4ff; }
+        /* 菜单样式 */
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; height: 100%; }
+        .nav-links > li { position: relative; display: flex; align-items: center; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; transition: 0.3s; }
+        .nav-links > li:hover > a { color: #00d4ff; }
 
-        /* 下拉菜单样式 - 关键部分 */
+        /* 下拉菜单 */
         .dropdown-content {
-            display: none; /* 默认隐藏 */
+            display: none;
             position: absolute;
             background-color: #ffffff;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            top: 100%;
+            min-width: 230px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            top: 80px; 
             left: 0;
             padding: 10px 0;
-            border-radius: 4px;
+            border-top: 3px solid #00d4ff;
         }
-        .dropdown-content li { list-style: none; }
-        .dropdown-content a { color: #333; padding: 10px 20px; display: block; }
-        .dropdown-content a:hover { background-color: #f1f1f1; color: #002b5e; }
-        
-        /* 鼠标悬停显示下拉菜单 */
         .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.2s; }
+        .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 28px; }
 
-        /* 首页大图区域 (Hero) */
+        /* --- 核心修改：实现真正全屏铺满 --- */
         .hero { 
-            background: linear-gradient(rgba(0,43,94,0.7), rgba(0,43,94,0.7)), url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover;
-            height: 60vh;
+            position: relative;
+            /* 100vh 确保占满整个浏览器视口高度 */
+            height: 100vh; 
+            /* 减去导航栏高度的补偿（可选，如果想让内容正对屏幕中心） */
+            margin-top: -80px; 
+            padding-top: 80px; 
+            width: 100%;
+            background: linear-gradient(rgba(0,43,94,0.6), rgba(0,43,94,0.6)), 
+                        url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* 增加视差滚动效果，显得更高端 */
+            
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
+            box-sizing: border-box;
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-        .btn { background: #00d4ff; color: #002b5e; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        
+        /* 纠正 Hero 分级内容样式 */
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: #ffffff; transform: scale(1.05); }
+
+        /* 产品展示区域 */
+        .products-preview { padding: 80px 5%; background: #f4f7f9; text-align: center; }
+        .section-title { font-size: 2.5rem; color: #002b5e; margin-bottom: 50px; }
+        
+        .product-grid { 
+            display: flex; 
+            gap: 25px; 
+            justify-content: center; 
+            flex-wrap: nowrap; 
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .product-card { 
+            background: white; 
+            flex: 1; 
+            min-width: 320px; 
+            border-radius: 18px; 
+            overflow: hidden; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.06); 
+            transition: 0.4s; 
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-12px); }
+
+        .product-card img { 
+            width: 100%; 
+            height: 280px; 
+            object-fit: contain; 
+            background: #fff; 
+            display: block;
+            padding: 15px; 
+            box-sizing: border-box;
+        }
+
+        .product-info { padding: 25px; text-align: left; flex-grow: 1; }
+        .product-info h3 { color: #002b5e; margin: 0 0 10px 0; font-size: 1.3rem; }
+        
+        footer { background: #1a1a1a; color: #ccc; padding: 50px 10%; text-align: center; border-top: 4px solid #00d4ff; }
+
+        @media (max-width: 1100px) {
+            .product-grid { flex-wrap: wrap; }
+            .product-card { min-width: 45%; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <nav>
-        <div class="logo">E-CHARGE TECH</div>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Echarging New Energy">
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            
             <li class="dropdown">
-                <a href="#">About Us ▾</a>
+                <a href="#">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="profile.html">Company Profile</a></li>
-                    <li><a href="#">Corporate Culture</a></li>
-                    <li><a href="#">Chairman's Message</a></li>
-                    <li><a href="#">Certificates & Honors</a></li>
-                    <li><a href="#">R&D / Production</a></li>
-                    <li><a href="#">Our History</a></li>
+                    <li><a href="#">Certificates</a></li>
                 </ul>
             </li>
-
             <li class="dropdown">
-                <a href="#">Products ▾</a>
+                <a href="#">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">Product Center</a></li>
-                    <li><a href="#">Solutions</a></li>
-                    <li><a href="#">Case Studies</a></li>
-                    <li><a href="#">Downloads</a></li>
+                    <li><a href="#">AC Chargers</a></li>
+                    <li><a href="#">DC Fast Chargers</a></li>
+                    <li><a href="#">Split Stacks</a></li>
                 </ul>
             </li>
-
-            <li class="dropdown">
-                <a href="#">News ▾</a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Company News</a></li>
-                    <li><a href="#">Industry Trends</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a href="#">Support ▾</a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Technical Support</a></li>
-                    <li><a href="#">Customer Service</a></li>
-                    <li><a href="#">After-sales</a></li>
-                </ul>
-            </li>
-
+            <li><a href="#">News</a></li>
             <li><a href="#">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
 <section class="hero">
-    <h1>Powering the Future of Mobility</h1>
-    <p>Professional EV Charging Modules & Stations Provider</p>
-    <br>
-    <a href="#" class="btn">View Products</a>
+    <h1>Empowering Global EV Charging</h1>
+    <p>Leading provider of high-efficiency charging solutions for a sustainable future.</p>
+    <a href="#" class="btn">Explore Products</a>
 </section>
 
-<div style="padding: 50px; text-align: center;">
-    <h2>Our Core Technology</h2>
-    <p>Welcome to E-Charge. We specialize in high-efficiency charging modules for the global market.</p>
-</div>
+<section class="products-preview">
+    <h2 class="section-title">Core Products</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="AC Charger.jpg" alt="Smart AC Charger">
+            <div class="product-info">
+                <h3>Smart AC Chargers</h3>
+                <p>7kW / 11kW / 22kW wallbox solutions with intelligent load balancing and IP54 protection.</p>
+                <a href="#" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Learn More →</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="DC Charger.png" alt="DC Fast Charger">
+            <div class="product-info">
+                <h3>DC Fast Chargers</h3>
+                <p>60kW-240kW high-speed DC charging stations with dual connectors for public use.</p>
+                <a href="#" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Learn More →</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="Split-Stack.png" alt="Split Charging Stack">
+            <div class="product-info">
+                <h3>Split Charging Stack</h3>
+                <p>Flexible power allocation system, supporting up to 720kW for large-scale charging hubs.</p>
+                <a href="#" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Learn More →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
