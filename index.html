@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Charge | Leading EV Charging Solution</title>
+    <style>
+        /* 基础样式 - 这里的颜色参考了优优绿能的科技蓝 */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; line-height: 1.6; color: #333; }
+        header { background: #002b5e; color: white; padding: 1rem 5%; position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #00d4ff; }
+
+        /* 导航菜单样式 */
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+        .nav-links > li { position: relative; padding: 10px 20px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: #00d4ff; }
+
+        /* 下拉菜单样式 - 关键部分 */
+        .dropdown-content {
+            display: none; /* 默认隐藏 */
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            border-radius: 4px;
+        }
+        .dropdown-content li { list-style: none; }
+        .dropdown-content a { color: #333; padding: 10px 20px; display: block; }
+        .dropdown-content a:hover { background-color: #f1f1f1; color: #002b5e; }
+        
+        /* 鼠标悬停显示下拉菜单 */
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* 首页大图区域 (Hero) */
+        .hero { 
+            background: linear-gradient(rgba(0,43,94,0.7), rgba(0,43,94,0.7)), url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .btn { background: #00d4ff; color: #002b5e; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">E-CHARGE TECH</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="dropdown">
+                <a href="#">About Us ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="profile.html">Company Profile</a></li>
+                    <li><a href="#">Corporate Culture</a></li>
+                    <li><a href="#">Chairman's Message</a></li>
+                    <li><a href="#">Certificates & Honors</a></li>
+                    <li><a href="#">R&D / Production</a></li>
+                    <li><a href="#">Our History</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#">Products ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Product Center</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Downloads</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#">News ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Company News</a></li>
+                    <li><a href="#">Industry Trends</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#">Support ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Technical Support</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">After-sales</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Powering the Future of Mobility</h1>
+    <p>Professional EV Charging Modules & Stations Provider</p>
+    <br>
+    <a href="#" class="btn">View Products</a>
+</section>
+
+<div style="padding: 50px; text-align: center;">
+    <h2>Our Core Technology</h2>
+    <p>Welcome to E-Charge. We specialize in high-efficiency charging modules for the global market.</p>
+</div>
+
+</body>
+</html>
