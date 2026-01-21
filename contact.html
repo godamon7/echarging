@@ -7,53 +7,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #fff; }
-        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 1000; }
+        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .logo img { height: 45px; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
-        .nav-links { list-style: none; display: flex; margin: 0; }
-        .nav-links li { margin-left: 25px; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; font-size: 15px; }
+        
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; height: 100%; }
+        .nav-links > li { position: relative; display: flex; align-items: center; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; }
+        
+        .dropdown-content { display: none; position: absolute; background: white; min-width: 200px; top: 80px; border-top: 3px solid #00d4ff; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; }
 
-        .contact-hero { background: #002b5e; color: white; padding: 100px 5% 150px; text-align: center; }
-        .contact-hero h1 { font-size: 3rem; margin-bottom: 20px; }
-
-        .container { max-width: 1200px; margin: -80px auto 100px; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
-
-        /* 左侧信息 */
-        .contact-info { background: white; padding: 50px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-        .office-block { margin-bottom: 40px; }
-        .office-block h3 { color: #002b5e; font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .office-block h3 i { color: #00d4ff; }
-        .office-block p { color: #666; font-size: 1rem; margin-left: 32px; }
-
-        .details-list { border-top: 1px solid #eee; padding-top: 30px; margin-top: 30px; }
-        .details-list a { display: flex; align-items: center; gap: 15px; color: #333; text-decoration: none; margin-bottom: 20px; font-weight: 500; transition: 0.3s; }
-        .details-list a:hover { color: #00d4ff; }
-        .details-list i { background: #f4f7f9; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #002b5e; }
-
-        /* 右侧表单 */
+        .contact-hero { 
+            position: relative; height: 480px; 
+            background: linear-gradient(rgba(0, 43, 94, 0.4), rgba(0, 43, 94, 0.4)), url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+            background-attachment: fixed; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;
+        }
+        .container { max-width: 1200px; margin: -100px auto 100px; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; position: relative; z-index: 10; }
+        .contact-info { background: white; padding: 50px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #eee; }
         .contact-form { background: #f4f7f9; padding: 50px; border-radius: 20px; }
-        .contact-form h2 { color: #002b5e; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; font-size: 1rem; }
-        .submit-btn { background: #002b5e; color: white; border: none; padding: 18px 40px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; font-size: 1.1rem; }
-        .submit-btn:hover { background: #00d4ff; color: #002b5e; transform: translateY(-3px); }
-
+        .submit-btn { background: #002b5e; color: white; border: none; padding: 18px 40px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+        .submit-btn:hover { background: #00d4ff; color: #002b5e; }
         footer { background: #1a1a1a; color: #ccc; padding: 50px 10%; text-align: center; }
-
         @media (max-width: 992px) { .container { grid-template-columns: 1fr; margin-top: -50px; } }
     </style>
 </head>
 <body>
-
 <header>
     <nav>
         <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="profile.html">About Us</a></li>
-            <li><a href="products.html">Products</a></li>
+            <li class="dropdown">
+                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="profile.html">Company Profile</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="products.html">AC Chargers</a></li>
+                    <li><a href="products.html">DC Fast Chargers</a></li>
+                </ul>
+            </li>
             <li><a href="news.html">News & Cases</a></li>
             <li><a href="contact.html" style="color:#00d4ff;">Contact Us</a></li>
         </ul>
@@ -62,48 +60,27 @@
 
 <section class="contact-hero">
     <h1>Get In Touch</h1>
-    <p>Empowering your business with professional new energy solutions.</p>
+    <p>Empowering the world with leading EV charging solutions.</p>
 </section>
 
 <div class="container">
     <div class="contact-info">
-        <div class="office-block">
-            <h3><i class="fas fa-building"></i> Nanshan R&D Center</h3>
-            <p>305-306, Building F, Qihang Science and Innovation R&D Industrial Park, No. 1008, Songbai Road, Xili street, Nanshan District, Shenzhen</p>
-        </div>
-
-        <div class="office-block">
-            <h3><i class="fas fa-industry"></i> Bao'an Office</h3>
-            <p>9th Floor, Senhainuo Science & Technology Innovation Building, Gongye 1st Road, Shiyan Street, Bao'an District, Shenzhen</p>
-        </div>
-
-        <div class="details-list">
-            <a href="tel:+8675526656875"><i class="fas fa-phone"></i> +86-755-26656875</a>
-            <a href="mailto:sales@echargingcn.com"><i class="fas fa-envelope"></i> sales@echargingcn.com</a>
-            <a href="http://www.echargingcn.com" target="_blank"><i class="fas fa-globe"></i> www.echargingcn.com</a>
-        </div>
+        <h3>Nanshan R&D Center</h3>
+        <p>305-306, Building F, Qihang Science and Innovation R&D Industrial Park, Nanshan District, Shenzhen</p>
+        <h3>Bao'an Office</h3>
+        <p>9th Floor, Senhainuo Science & Technology Innovation Building, Shiyan Street, Bao'an District, Shenzhen</p>
+        <hr>
+        <p><i class="fas fa-phone"></i> +86-755-26656875</p>
+        <p><i class="fas fa-envelope"></i> sales@echargingcn.com</p>
     </div>
-
     <div class="contact-form">
         <h2>Inquiry Form</h2>
-        <form action="#">
-            <div class="form-group">
-                <input type="text" placeholder="Full Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Email Address" required>
-            </div>
-            <div class="form-group">
-                <textarea rows="6" placeholder="Message / Requirements"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">SEND INQUIRY</button>
-        </form>
+        <form><input type="text" placeholder="Full Name" style="width:100%; margin-bottom:10px; padding:10px;"><br><button type="submit" class="submit-btn">SEND INQUIRY</button></form>
     </div>
 </div>
 
 <footer>
     <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
 </footer>
-
 </body>
 </html>
