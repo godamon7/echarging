@@ -3,110 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News & Cases | Echarging New Energy</title>
+    <title>Global Cases & News | Echarging New Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #f4f7f9; }
         
         /* 统一导航栏 */
-        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .logo img { height: 45px; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
-        .nav-links { list-style: none; display: flex; margin: 0; }
-        .nav-links li { margin-left: 25px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; }
-        .nav-links a:hover { color: #00d4ff; }
+        
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; height: 100%; }
+        .nav-links > li { position: relative; display: flex; align-items: center; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; }
+        .nav-links > li:hover > a { color: #00d4ff; }
 
-        /* Banner */
-        .page-banner {
-            height: 300px;
-            background: linear-gradient(rgba(0,43,94,0.7), rgba(0,43,94,0.7)), 
-                        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1600') center/cover;
-            display: flex; align-items: center; justify-content: center; color: white;
+        /* 下拉菜单样式统一 */
+        .dropdown-content {
+            display: none; position: absolute; background: white; min-width: 200px;
+            top: 80px; left: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 3px solid #00d4ff;
         }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; }
+        .dropdown-content a:hover { background: #f5f5f5; color: #002b5e; }
 
-        .container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .section-title { text-align: center; margin-bottom: 50px; color: #002b5e; font-size: 2.5rem; }
+        /* 页面标题区 */
+        .page-header { background: #002b5e; color: white; padding: 60px 5%; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; margin: 0; }
 
-        /* 新闻网格 */
+        /* 案例网格 */
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        
         .news-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; }
         .news-card:hover { transform: translateY(-10px); }
-        .news-img { height: 230px; background-size: cover; background-position: center; position: relative; }
+        
+        .news-img { height: 240px; background-size: cover; background-position: center; position: relative; }
         .category-tag { position: absolute; top: 20px; left: 20px; background: #00d4ff; color: #002b5e; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
         
         .news-info { padding: 25px; }
-        .news-date { color: #999; font-size: 0.9rem; }
-        .news-info h3 { color: #002b5e; margin: 10px 0; font-size: 1.3rem; height: 3.2em; overflow: hidden; }
+        .news-date { color: #888; font-size: 0.9rem; }
+        .news-info h3 { color: #002b5e; margin: 15px 0; font-size: 1.4rem; line-height: 1.3; }
         .news-info p { color: #666; font-size: 0.95rem; margin-bottom: 20px; }
+        
         .read-more { color: #00d4ff; text-decoration: none; font-weight: bold; border-bottom: 2px solid transparent; transition: 0.3s; }
-        .read-more:hover { border-bottom-color: #00d4ff; }
+        .read-more:hover { border-bottom: 2px solid #00d4ff; }
 
-        footer { background: #1a1a1a; color: #ccc; padding: 50px 10%; text-align: center; }
+        footer { background: #1a1a1a; color: #ccc; padding: 40px; text-align: center; margin-top: 80px; }
     </style>
 </head>
 <body>
 
 <header>
     <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Logo"></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="profile.html">About Us</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="news.html" style="color:#00d4ff;">News & Cases</a></li>
+            <li class="dropdown">
+                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="profile.html">Company Profile</a></li>
+                    <li><a href="profile.html#certificates">Certificates</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="#">AC Chargers</a></li>
+                    <li><a href="#">DC Fast Chargers</a></li>
+                </ul>
+            </li>
+            <li><a href="news.html" style="color: #00d4ff;">News & Cases</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
-<section class="page-banner">
-    <h1>News & Global Cases</h1>
+<section class="page-header">
+    <h1>Global Success Cases</h1>
+    <p>Proven charging solutions deployed in 30+ countries</p>
 </section>
 
 <div class="container">
-    <h2 class="section-title">Latest Insights</h2>
     <div class="news-grid">
         <div class="news-card">
             <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=800');">
-                <span class="category-tag">CASE STUDY</span>
+                <span class="category-tag">ULTRA-FAST CHARGING</span>
             </div>
             <div class="news-info">
-                <span class="news-date">Jan 10, 2026</span>
-                <h3>Shenzhen Public Transport: 480kW Ultra-Fast Charging Hub</h3>
-                <p>Deploying liquid-cooled technology to support high-frequency bus operations in Nanshan District.</p>
-                <a href="#" class="read-more">Learn More →</a>
+                <span class="news-date">January 20, 2026</span>
+                <h3>Shenzhen Public Transport: 480kW Liquid-Cooled Hub</h3>
+                <p>Equipped with our latest liquid-cooling technology, this hub supports 50+ electric buses daily, reducing charging time from 2 hours to 35 minutes.</p>
+                <a href="#" class="read-more">Technical Specs →</a>
             </div>
         </div>
 
         <div class="news-card">
             <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1558444458-5f75bc962318?auto=format&fit=crop&q=80&w=800');">
-                <span class="category-tag">INNOVATION</span>
+                <span class="category-tag">INTEGRATED ENERGY</span>
             </div>
             <div class="news-info">
-                <span class="news-date">Dec 15, 2025</span>
-                <h3>Next-Gen Solar-Storage-Charging Integration</h3>
-                <p>Successful implementation of multi-modal energy solutions for industrial logistics parks.</p>
-                <a href="#" class="read-more">Learn More →</a>
+                <span class="news-date">December 12, 2025</span>
+                <h3>Thailand Logistics Park: Solar-Storage-Charging</h3>
+                <p>A green energy ecosystem combining 1MW rooftop solar, 500kWh battery storage, and 180kW DC chargers for heavy-duty electric trucks.</p>
+                <a href="#" class="read-more">System Architecture →</a>
             </div>
         </div>
 
         <div class="news-card">
-            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800');">
-                <span class="category-tag">CORPORATE</span>
+            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1473163928189-397022aa95a1?auto=format&fit=crop&q=80&w=800');">
+                <span class="category-tag">GLOBAL COMPLIANCE</span>
             </div>
             <div class="news-info">
-                <span class="news-date">Nov 28, 2025</span>
-                <h3>Expanding Global Standard Compliance</h3>
-                <p>Our full range of chargers now supports European, American, and Japanese standards for global export.</p>
-                <a href="#" class="read-more">Learn More →</a>
+                <span class="news-date">November 05, 2025</span>
+                <h3>European Highway Service: CCS2 Standard Deployment</h3>
+                <p>Our CE-certified 120kW DC stations are now operational across major highway rest areas in Germany and France, featuring localized payment integration.</p>
+                <a href="#" class="read-more">Compliance Details →</a>
             </div>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
+    <p>&copy; 2026 Echarging New Energy. All Rights Reserved.</p>
 </footer>
 
 </body>
