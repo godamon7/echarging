@@ -9,6 +9,7 @@
 
     <style>
         /* 基础设置 */
+        html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; overflow-x: hidden; }
         
         /* 导航栏 */
@@ -16,16 +17,14 @@
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         
         .logo { display: flex; align-items: center; text-decoration: none; }
-        .logo img { 
-            height: 45px; width: auto; display: block;
-            background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; 
-        }
+        .logo img { height: 45px; width: auto; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
 
-        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; height: 100%; }
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
         .nav-links > li { position: relative; display: flex; align-items: center; }
         .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
 
+        /* 下拉菜单 */
         .dropdown-content {
             display: none; position: absolute; background-color: #ffffff; min-width: 230px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0;
@@ -35,11 +34,9 @@
         .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.2s; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 28px; }
 
-        /* Hero 区域：缩减至 75vh，进一步紧凑布局 */
+        /* Hero 区域 - 紧凑型 */
         .hero { 
-            position: relative;
-            height: 75vh; 
-            width: 100%;
+            position: relative; height: 75vh; width: 100%;
             background: linear-gradient(rgba(0,43,94,0.6), rgba(0,43,94,0.6)), 
                         url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -47,35 +44,45 @@
         }
         .hero h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 25px; }
-        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; display: inline-block; }
+        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; display: inline-block; border: none; }
         .btn:hover { background: #ffffff; transform: scale(1.05); }
 
-        /* 产品展示：大幅减少顶部留白 */
-        .products-preview { padding: 30px 5% 70px 5%; background: #f4f7f9; text-align: center; }
-        .section-title { font-size: 2.5rem; color: #002b5e; margin-top: 0; margin-bottom: 35px; }
+        /* 产品展示 - 锁定参数 */
+        .products-preview { padding: 40px 5% 80px 5%; background: #f4f7f9; text-align: center; }
+        .section-title { font-size: 2.5rem; color: #002b5e; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: #00d4ff; }
+        
         .product-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; max-width: 1300px; margin: 0 auto; }
-        .product-card { background: white; flex: 1; min-width: 320px; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.06); transition: 0.4s; }
+        .product-card { background: white; flex: 1; min-width: 320px; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.06); transition: 0.4s; position: relative; }
         .product-card:hover { transform: translateY(-12px); }
-        .product-card img { width: 100%; height: 280px; object-fit: contain; padding: 15px; box-sizing: border-box; }
+        .product-card img { width: 100%; height: 280px; object-fit: contain; padding: 20px; box-sizing: border-box; }
+        
         .product-info { padding: 25px; text-align: left; }
         .product-info h3 { color: #002b5e; margin: 0 0 10px 0; font-size: 1.3rem; }
+        .tech-tag { display: inline-block; background: #e1f5fe; color: #0288d1; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; font-weight: bold; margin-right: 5px; }
 
-        /* 案例展示：三列并排 */
-        .cases-section { padding: 70px 5%; background: #fff; text-align: center; }
+        /* 为什么选择我们 */
+        .why-us { padding: 80px 5%; background: #002b5e; color: white; text-align: center; }
+        .features-grid { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; max-width: 1200px; margin: 40px auto 0; }
+        .feature-item { flex: 1; min-width: 250px; }
+        .feature-item i { font-size: 3rem; color: #00d4ff; margin-bottom: 20px; }
+        .feature-item h4 { font-size: 1.25rem; margin-bottom: 10px; }
+
+        /* 全球案例 - 三列并排 */
+        .cases-section { padding: 80px 5%; background: #fff; text-align: center; }
         .cases-grid { 
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; 
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; 
             max-width: 1300px; margin: 0 auto; 
         }
-        .case-card { position: relative; height: 320px; border-radius: 15px; overflow: hidden; cursor: pointer; }
+        .case-card { position: relative; height: 350px; border-radius: 15px; overflow: hidden; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .case-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .case-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,43,94,0.9)); color: white; padding: 20px; text-align: left; }
+        .case-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,43,94,0.95)); color: white; padding: 25px; text-align: left; }
         .case-card:hover img { transform: scale(1.1); }
-        
-        footer { background: #1a1a1a; color: #ccc; padding: 50px 10%; text-align: center; border-top: 4px solid #00d4ff; }
 
-        @media (max-width: 1024px) {
-            .cases-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        footer { background: #1a1a1a; color: #ccc; padding: 60px 10% 30px; text-align: center; border-top: 4px solid #00d4ff; }
+        .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; font-size: 14px; }
+
+        @media (max-width: 1024px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .hero { height: 60vh; }
@@ -98,7 +105,7 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <a href="#products">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="#">AC Chargers</a></li>
                     <li><a href="#">DC Fast Chargers</a></li>
@@ -114,17 +121,21 @@
 <section class="hero">
     <h1>Empowering Global EV Charging</h1>
     <p>Leading provider of high-efficiency charging solutions for a sustainable future.</p>
-    <a href="profile.html" class="btn">Learn More About Us</a>
+    <div style="display: flex; gap: 15px;">
+        <a href="profile.html" class="btn">Learn More</a>
+        <a href="contact.html" class="btn" style="background: transparent; border: 2px solid #00d4ff; color: #00d4ff;">Contact Us</a>
+    </div>
 </section>
 
-<section class="products-preview">
+<section class="products-preview" id="products">
     <h2 class="section-title">Core Products</h2>
     <div class="product-grid">
         <div class="product-card">
             <img src="AC Charger.jpg" alt="Smart AC Charger">
             <div class="product-info">
+                <span class="tech-tag">OCPP 1.6J</span><span class="tech-tag">IP55</span>
                 <h3>Smart AC Chargers</h3>
-                <p>7kW / 11kW / 22kW wallbox solutions with intelligent load balancing and IP54 protection.</p>
+                <p>7kW / 11kW / 22kW wallbox solutions with intelligent load balancing for home & commercial use.</p>
                 <a href="contact.html" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Inquiry Now →</a>
             </div>
         </div>
@@ -132,8 +143,9 @@
         <div class="product-card">
             <img src="DC Charger.png" alt="DC Fast Charger">
             <div class="product-info">
+                <span class="tech-tag">Dual Gun</span><span class="tech-tag">Fast Charge</span>
                 <h3>DC Fast Chargers</h3>
-                <p>60kW-480kW high-speed DC charging stations with dual connectors for public use.</p>
+                <p>60kW-480kW high-speed DC charging stations designed for public infrastructure and fleet hubs.</p>
                 <a href="contact.html" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Inquiry Now →</a>
             </div>
         </div>
@@ -141,10 +153,32 @@
         <div class="product-card">
             <img src="Split-Stack.png" alt="Split Charging Stack">
             <div class="product-info">
+                <span class="tech-tag">Liquid Cooling</span><span class="tech-tag">Scalable</span>
                 <h3>Split Charging Stack</h3>
-                <p>Flexible power allocation system, 720kW per stack, supporting up to 1680kW for large hubs.</p>
+                <p>Flexible power allocation, 720kW per stack, scalable up to 1680kW for ultra-fast charging hubs.</p>
                 <a href="contact.html" style="color: #00d4ff; text-decoration: none; font-weight: bold;">Inquiry Now →</a>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="why-us">
+    <h2 class="section-title" style="color: white; border-color: #00d4ff;">Why Partner With Us</h2>
+    <div class="features-grid">
+        <div class="feature-item">
+            <i class="fas fa-certificate"></i>
+            <h4>Global Standards</h4>
+            <p>Full compliance with CE, TUV, and UL standards for seamless global deployment.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-tools"></i>
+            <h4>R&D Excellence</h4>
+            <p>In-house technology development ensuring high efficiency and 99.9% uptime.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-globe"></i>
+            <h4>Global Support</h4>
+            <p>24/7 technical assistance and local service partners across 30+ countries.</p>
         </div>
     </div>
 </section>
@@ -157,6 +191,7 @@
             <div class="case-overlay">
                 <small style="color: #00d4ff; font-weight: bold;">SHENZHEN, CHINA</small>
                 <h3>600kW Ultra-Fast Hub</h3>
+                <p style="font-size: 13px; margin-top: 5px;">Public transport fleet electrification.</p>
             </div>
         </div>
         <div class="case-card" onclick="location.href='news.html'">
@@ -164,20 +199,46 @@
             <div class="case-overlay">
                 <small style="color: #00d4ff; font-weight: bold;">BANGKOK, THAILAND</small>
                 <h3>Solar-Storage Integrated Park</h3>
+                <p style="font-size: 13px; margin-top: 5px;">Sustainable energy for logistics centers.</p>
             </div>
         </div>
         <div class="case-card" onclick="location.href='news.html'">
             <img src="https://images.unsplash.com/photo-1473163928189-397022aa95a1?auto=format&fit=crop&q=80&w=800" alt="Europe Case">
             <div class="case-overlay">
                 <small style="color: #00d4ff; font-weight: bold;">GERMANY / FRANCE</small>
-                <h3>CCS2 Highway Charging Network</h3>
+                <h3>Highway Charging Network</h3>
+                <p style="font-size: 13px; margin-top: 5px;">High-speed CCS2 infrastructure.</p>
             </div>
         </div>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left;">
+        <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
+            <img src="logo.png" alt="Logo" style="height: 40px; background: white; padding: 5px; border-radius: 5px;">
+            <p style="margin-top: 15px;">Your trusted global partner in EV charging infrastructure and energy management.</p>
+        </div>
+        <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+            <h4 style="color: white;">Quick Links</h4>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="profile.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
+                <li><a href="#products" style="color: #ccc; text-decoration: none;">Products</a></li>
+                <li><a href="contact.html" style="color: #ccc; text-decoration: none;">Contact Us</a></li>
+            </ul>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="color: white;">Follow Us</h4>
+            <div style="font-size: 24px;">
+                <a href="#" style="color: white; margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: white; margin-right: 15px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
+    </div>
 </footer>
 
 </body>
