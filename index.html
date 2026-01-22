@@ -32,7 +32,7 @@
         .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
 
-        /* 下拉菜单：增加 z-index 确保不被 Hero 遮挡 */
+        /* 下拉菜单：修正 z-index 确保不被 Hero 遮挡 */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -73,7 +73,7 @@
         
         .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; border:none; cursor: pointer; }
+        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; border:none; cursor: pointer; display: inline-block; }
         .btn:hover { background: #ffffff; transform: scale(1.05); }
 
         /* 产品展示区域 */
@@ -151,7 +151,7 @@
         </div>
 
         <div class="product-card">
-            <img src="DC Charger.jpg" alt="DC Fast Charger">
+            <img src="DC Charger.png" alt="DC Fast Charger">
             <div class="product-info">
                 <h3>DC Fast Chargers</h3>
                 <p>60kW-240kW high-speed DC charging stations with dual connectors for public use.</p>
@@ -160,7 +160,7 @@
         </div>
 
         <div class="product-card">
-            <img src="Split-Stack.jpg" alt="Split Charging Stack">
+            <img src="Split-Stack.png" alt="Split Charging Stack">
             <div class="product-info">
                 <h3>Split Charging Stack</h3>
                 <p>Flexible power allocation system, supporting up to 720kW for large-scale charging hubs.</p>
