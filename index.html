@@ -34,21 +34,61 @@
         .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.2s; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 28px; }
 
-        /* Hero 区域 - 紧凑型 */
+        /* Hero 区域：恢复全屏高度 */
         .hero { 
-            position: relative; height: 75vh; width: 100%;
+            position: relative; height: 100vh; width: 100%;
             background: linear-gradient(rgba(0,43,94,0.6), rgba(0,43,94,0.6)), 
                         url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: white; box-sizing: border-box;
+            margin-top: -80px; /* 补偿 sticky header 的高度，让内容从顶部开始 */
+            padding-top: 80px; /* 确保内容不被 header 遮挡 */
         }
         .hero h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 25px; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 25px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
         .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; display: inline-block; border: none; }
         .btn:hover { background: #ffffff; transform: scale(1.05); }
 
+        /* 新增的两个全屏 Banner 区域 */
+        .full-width-banner {
+            width: 100%;
+            height: 65vh; /* 可根据图片内容和视觉效果调整高度 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .full-width-banner::before { /* 用于图片叠加层，增强文字可读性 */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* 较浅的黑色透明叠加 */
+            z-index: 1;
+        }
+        .full-width-banner .content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            max-width: 800px;
+        }
+        .full-width-banner h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .full-width-banner p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
         /* 产品展示 - 锁定参数 */
-        .products-preview { padding: 40px 5% 80px 5%; background: #f4f7f9; text-align: center; }
+        .products-preview { padding: 80px 5% 80px 5%; background: #f4f7f9; text-align: center; }
         .section-title { font-size: 2.5rem; color: #002b5e; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: #00d4ff; }
         
@@ -82,11 +122,17 @@
         footer { background: #1a1a1a; color: #ccc; padding: 60px 10% 30px; text-align: center; border-top: 4px solid #00d4ff; }
         .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; font-size: 14px; }
 
-        @media (max-width: 1024px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1024px) { 
+            .cases-grid { grid-template-columns: repeat(2, 1fr); } 
+            .full-width-banner h2 { font-size: 2.5rem; }
+        }
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .hero { height: 60vh; }
+            .hero { height: 70vh; /* 移动端适当降低 Hero 高度 */ }
             .product-card, .cases-grid { grid-template-columns: 1fr; }
+            .full-width-banner { height: 50vh; }
+            .full-width-banner h2 { font-size: 2rem; }
+            .full-width-banner p { font-size: 1rem; }
         }
     </style>
 </head>
@@ -124,6 +170,22 @@
     <div style="display: flex; gap: 15px;">
         <a href="profile.html" class="btn">Learn More</a>
         <a href="contact.html" class="btn" style="background: transparent; border: 2px solid #00d4ff; color: #00d4ff;">Contact Us</a>
+    </div>
+</section>
+
+<section class="full-width-banner" style="background-image: url('https://images.unsplash.com/photo-1577953259160-c119e27c13a3?auto=format&fit=crop&q=80&w=1600');">
+    <div class="content">
+        <h2>Innovative Charging Technologies</h2>
+        <p>Driving the future with cutting-edge power electronics and smart energy management.</p>
+        <a href="#products" class="btn" style="margin-top: 20px;">Explore Our Products</a>
+    </div>
+</section>
+
+<section class="full-width-banner" style="background-image: url('https://images.unsplash.com/photo-1502945037996-fe0cc79e3943?auto=format&fit=crop&q=80&w=1600');">
+    <div class="content">
+        <h2>Reliable & Efficient Solutions</h2>
+        <p>Built for durability and peak performance in any environment, globally.</p>
+        <a href="news.html" class="btn" style="margin-top: 20px;">View Our Cases</a>
     </div>
 </section>
 
