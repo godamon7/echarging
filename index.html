@@ -4,58 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echarging New Energy | Global EV Charging Solution Provider</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; overflow-x: hidden; }
         
-        /* 导航栏与下拉菜单 */
+        /* 导航栏 */
         header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .logo img { height: 45px; width: auto; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
 
         .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-        .nav-links > li { position: relative; }
-        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
-        .nav-links > li:hover > a { color: #00d4ff; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; }
 
-        /* 下拉菜单样式 [cite: 2026-01-20] */
-        .dropdown-content {
-            display: none; position: absolute; background-color: #ffffff; min-width: 200px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0;
-            padding: 10px 0; border-top: 3px solid #00d4ff; 
-        }
-        .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.2s; }
-        .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 25px; }
-
-        /* 轮播容器 */
+        /* 轮播 Banner */
         .banner-carousel {
-            position: relative; height: 100vh; width: 100%; overflow: hidden; margin-top: -80px; background-color: #002b5e; 
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            margin-top: -80px; 
+            background-color: #000; /* 防止加载图时的白闪 */
         }
+
         .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
-            transition: opacity 1.2s ease-in-out; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; color: white;
-            background-size: cover; background-position: center; background-repeat: no-repeat;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         .slide.active { opacity: 1; z-index: 1; }
-        .slide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: -1; }
+
+        /* 遮罩 */
+        .slide::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); z-index: -1;
+        }
 
         .slide h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .slide p { font-size: 1.2rem; max-width: 800px; margin-bottom: 25px; padding: 0 20px; }
-        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; border: none; }
 
-        /* 产品展示板块 [cite: 2026-01-22] */
+        .btn { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
+
+        /* 产品及案例样式保持不变 */
         .products-preview { padding: 80px 5%; background: #f4f7f9; text-align: center; }
         .section-title { font-size: 2.5rem; color: #002b5e; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: #00d4ff; }
         .product-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; max-width: 1300px; margin: 0 auto; }
-        .product-card { background: white; flex: 1; min-width: 320px; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.06); transition: 0.4s; }
-        .product-card:hover { transform: translateY(-10px); }
+        .product-card { background: white; flex: 1; min-width: 320px; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.06); }
         .product-card img { width: 100%; height: 280px; object-fit: contain; padding: 20px; box-sizing: border-box; }
         
-        /* 成功案例板块 [cite: 2026-01-22] */
         .cases-section { padding: 80px 5%; background: #fff; text-align: center; }
         .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1300px; margin: 0 auto; }
         .case-card { position: relative; height: 350px; border-radius: 15px; overflow: hidden; }
@@ -63,6 +69,7 @@
         .case-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,43,94,0.95)); color: white; padding: 25px; text-align: left; }
 
         footer { background: #1a1a1a; color: #ccc; padding: 40px 10%; text-align: center; }
+
         @media (max-width: 768px) { .slide h1 { font-size: 2.2rem; } .product-card, .cases-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -70,24 +77,11 @@
 
 <header>
     <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Logo"></a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging New Energy"></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="profile.html">Company Profile</a></li>
-                    <li><a href="profile.html#certificates">Certificates</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#products">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="#">AC Chargers</a></li>
-                    <li><a href="#">DC Fast Chargers (60kW-480kW)</a></li>
-                    <li><a href="#">Split Charging Stacks</a></li>
-                </ul>
-            </li>
+            <li><a href="profile.html">About Us</a></li>
+            <li><a href="#products">Products</a></li>
             <li><a href="news.html">News & Cases</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
@@ -95,7 +89,7 @@
 </header>
 
 <section class="banner-carousel">
-    <div class="slide active" style="background-image: url('image_81cb6c.jpg');">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600');">
         <h1>Empowering Global EV Charging</h1>
         <p>Leading provider of high-efficiency charging solutions for a sustainable future.</p>
         <a href="profile.html" class="btn">Learn More</a>
@@ -104,13 +98,13 @@
     <div class="slide" style="background-image: url('banner2.jpg');">
         <h1>Innovative Technology</h1>
         <p>Smart energy management for the next generation of mobility.</p>
-        <a href="#products" class="btn">Our Products</a>
+        <a href="#products" class="btn">View Products</a>
     </div>
 
     <div class="slide" style="background-image: url('banner3.jpg');">
-        <h1>600kW Ultra-Fast Hub</h1>
-        <p>Advanced infrastructure for rapid power delivery worldwide.</p>
-        <a href="news.html" class="btn">Global Cases</a>
+        <h1>Global Success</h1>
+        <p>Providing reliable charging infrastructure across 30+ countries.</p>
+        <a href="news.html" class="btn">Success Cases</a>
     </div>
 </section>
 
@@ -121,7 +115,7 @@
             <img src="AC Charger.jpg" alt="AC">
             <div style="padding: 20px; text-align: left;">
                 <h3>Smart AC Chargers</h3>
-                <p>7kW - 22kW intelligent charging solutions.</p>
+                <p>7kW - 22kW intelligent wallbox solutions.</p>
             </div>
         </div>
         <div class="product-card">
@@ -145,24 +139,24 @@
     <h2 class="section-title">Global Success Cases</h2>
     <div class="cases-grid">
         <div class="case-card">
-            <img src="image_81cb6c.jpg" alt="China">
+            <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=800" alt="China">
             <div class="case-overlay">
                 <small>SHENZHEN, CHINA</small>
                 <h3>600kW Ultra-Fast Hub</h3>
             </div>
         </div>
         <div class="case-card">
-            <img src="banner2.jpg" alt="Asia">
+            <img src="https://images.unsplash.com/photo-1558444458-5f75bc962318?auto=format&fit=crop&q=80&w=800" alt="Asia">
             <div class="case-overlay">
                 <small>BANGKOK, THAILAND</small>
-                <h3>Smart Energy Charging Park</h3>
+                <h3>Solar-Storage Integrated Park</h3>
             </div>
         </div>
         <div class="case-card">
-            <img src="banner3.jpg" alt="Europe">
+            <img src="https://images.unsplash.com/photo-1473163928189-397022aa95a1?auto=format&fit=crop&q=80&w=800" alt="Europe">
             <div class="case-overlay">
-                <small>BERLIN, GERMANY</small>
-                <h3>Highway Fast Charge Network</h3>
+                <small>GERMANY / FRANCE</small>
+                <h3>Highway Charging Network</h3>
             </div>
         </div>
     </div>
