@@ -18,8 +18,11 @@
 
         .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
         .nav-links > li { position: relative; }
-        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
+
+        /* 手机端菜单开关按钮 (默认隐藏) */
+        .menu-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
 
         /* 下拉菜单 */
         .dropdown-content {
@@ -30,11 +33,32 @@
         .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 25px; }
 
+        /* 响应式媒体查询 (手机端适配) */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; } /* 显示汉堡按钮 */
+            .nav-links {
+                position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px);
+                background: #002b5e; flex-direction: column; align-items: center;
+                transition: 0.4s ease-in-out; padding-top: 30px; z-index: 999;
+            }
+            .nav-links.active { right: 0; } /* 菜单弹出 */
+            .nav-links > li { width: 100%; text-align: center; }
+            .nav-links > li > a { line-height: 60px; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            
+            /* 手机端下拉菜单点击可见 */
+            .dropdown-content { position: static; background: #001d3d; box-shadow: none; border-top: none; width: 100%; }
+            .dropdown.active .dropdown-content { display: block; }
+            .dropdown-content a { color: #fff; }
+
+            /* 首页板块适配 */
+            .slide h1 { font-size: 2.2rem; }
+            .product-card, .cases-grid { grid-template-columns: 1fr !important; }
+        }
+
         /* 轮播 Banner */
         .banner-carousel {
             position: relative; height: 100vh; width: 100%; overflow: hidden; margin-top: -80px; background-color: #000; 
         }
-
         .slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
             transition: opacity 1.2s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -43,7 +67,6 @@
         .slide.active { opacity: 1; z-index: 1; }
         .slide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: -1; }
 
-        /* 左右控制箭头 */
         .carousel-control {
             position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
             background: rgba(255,255,255,0.1); color: white; border: none; padding: 25px 15px;
@@ -53,7 +76,6 @@
         .prev { left: 0; border-radius: 0 5px 5px 0; }
         .next { right: 0; border-radius: 5px 0 0 5px; }
 
-        /* 指示圆点 */
         .dots-container {
             position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
             z-index: 10; display: flex; gap: 10px;
@@ -81,8 +103,6 @@
         .case-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,43,94,0.95)); color: white; padding: 25px; text-align: left; }
 
         footer { background: #1a1a1a; color: #ccc; padding: 40px 10%; text-align: center; }
-
-        @media (max-width: 768px) { .slide h1 { font-size: 2.2rem; } .product-card, .cases-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -90,17 +110,22 @@
 <header>
     <nav>
         <a href="index.html" class="logo"><img src="logo.png" alt="Echarging New Energy"></a>
-        <ul class="nav-links">
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="nav-list">
             <li><a href="index.html">Home</a></li>
             <li class="dropdown">
-                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <a href="javascript:void(0)" class="dropdown-btn">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="profile.html">Company Profile</a></li>
                     <li><a href="profile.html#certificates">Certificates</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#products">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <a href="javascript:void(0)" class="dropdown-btn">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="#">AC Chargers</a></li>
                     <li><a href="#">DC Fast Chargers (60kW-480kW)</a></li>
@@ -201,6 +226,7 @@
 </footer>
 
 <script>
+    // 轮播逻辑
     let current = 0;
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -222,13 +248,32 @@
         updateSlides();
     }
 
-    // 自动播放
     let timer = setInterval(() => moveSlide(1), 5000);
-
-    // 用户操作后重置定时器
     const carousel = document.getElementById('carousel');
     carousel.addEventListener('mouseenter', () => clearInterval(timer));
     carousel.addEventListener('mouseleave', () => timer = setInterval(() => moveSlide(1), 5000));
+
+    // --- 手机端导航逻辑 ---
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+
+    menuToggle.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    // 手机端下拉点击
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    dropdownBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                btn.parentElement.classList.toggle('active');
+            }
+        });
+    });
 </script>
 
 </body>
