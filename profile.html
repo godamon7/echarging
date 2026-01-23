@@ -3,184 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile | Echarging New Energy</title>
+    <title>Company Profile | ECharging New Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 基础样式复用 */
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #fff; overflow-x: hidden; }
-        
-        /* 导航栏 */
-        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo img { height: 45px; width: auto; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
-        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-        .nav-links > li { position: relative; }
-        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
-        .nav-links > li:hover > a { color: #00d4ff; }
-
-        /* 下拉菜单 */
-        .dropdown-content {
-            display: none; position: absolute; background-color: #ffffff; min-width: 250px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0; padding: 10px 0; border-top: 3px solid #00d4ff; 
+        :root {
+            --primary: #002b5e;
+            --accent: #00d4ff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
         }
-        .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 25px; }
 
-        /* Banner 区域 */
-        .page-banner { 
-            background: linear-gradient(rgba(0, 43, 94, 0.8), rgba(0, 43, 94, 0.8)), 
-                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600') center/cover;
-            color: white; padding: 100px 5%; text-align: center; 
+        body { font-family: 'Inter', 'Segoe UI', sans-serif; margin: 0; background: #fff; color: var(--text-dark); }
+        
+        /* 透明导航，提升高级感 */
+        header { background: var(--primary); padding: 0 5%; position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; justify-content: space-between; }
+        .logo img { height: 42px; background: white; padding: 6px 15px; border-radius: 4px; }
+        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* 顶部大视觉区 */
+        .hero-section {
+            display: flex;
+            min-height: 600px;
+            align-items: stretch;
+            background: #f4f7fa;
         }
-        .page-banner h1 { font-size: 3rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* 内容板块样式 */
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        
-        /* 核心文字介绍排版 */
-        .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; margin-bottom: 80px; }
-        .about-content h2 { color: #002b5e; font-size: 2.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
-        .about-content h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; background: #00d4ff; }
-        .about-content p { font-size: 1.05rem; color: #444; margin-bottom: 20px; text-align: justify; line-height: 1.8; }
-        
-        .about-image img { width: 100%; border-radius: 15px; box-shadow: 20px 20px 0 #f0f7ff; object-fit: cover; }
+        .hero-text {
+            flex: 1;
+            padding: 80px 5% 80px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        /* 技术优势矩阵 */
-        .tech-section { background: #002b5e; color: white; padding: 80px 0; border-radius: 40px; }
-        .tech-header { text-align: center; margin-bottom: 50px; padding: 0 20px; }
-        .tech-header h2 { font-size: 2.2rem; margin-bottom: 15px; }
-        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 0 5%; }
-        .tech-card { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .tech-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-10px); }
-        .tech-card i { font-size: 2.2rem; color: #00d4ff; margin-bottom: 20px; display: block; }
-        .tech-card h4 { font-size: 1.15rem; margin-bottom: 15px; color: #00d4ff; text-transform: uppercase; }
-        .tech-card p { font-size: 0.95rem; line-height: 1.7; color: #cbd5e0; }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
 
-        /* 产品线概览 */
-        .solutions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; }
-        .solution-tag { background: #fff; border: 1px solid #eee; padding: 25px 15px; border-radius: 15px; text-align: center; transition: 0.3s; }
-        .solution-tag:hover { border-color: #00d4ff; transform: scale(1.05); }
-        .solution-tag i { font-size: 2rem; color: #002b5e; margin-bottom: 15px; display: block; }
-        .solution-tag span { font-weight: bold; color: #002b5e; display: block; margin-bottom: 5px; }
-        .solution-tag small { color: #00d4ff; font-weight: bold; }
+        .hero-text .tagline {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
 
-        footer { background: #1a1a1a; color: #ccc; padding: 50px 10%; text-align: center; }
+        .hero-image {
+            flex: 1;
+            background: url('company.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        /* 数据指标横条 */
+        .stats-grid {
+            background: var(--primary);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 50px 10%;
+            gap: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-card h3 { font-size: 2.5rem; margin: 0; color: var(--accent); }
+        .stat-card p { font-size: 0.9rem; opacity: 0.8; margin: 5px 0 0; text-transform: uppercase; }
+
+        /* 核心优势区域 */
+        .intro-details {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .detail-box h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .detail-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .expert-banner {
+            background: linear-gradient(135deg, #002b5e 0%, #004a8d 100%);
+            color: white;
+            padding: 60px 10%;
+            border-radius: 20px;
+            margin: 50px 5%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .expert-banner i { font-size: 4rem; color: var(--accent); }
+        .expert-banner div h3 { font-size: 1.8rem; margin: 0 0 10px 0; }
+        .expert-banner div p { opacity: 0.9; font-size: 1.1rem; margin: 0; }
+
+        footer { background: #111; color: #555; padding: 60px 5%; text-align: center; border-top: 1px solid #222; }
 
         @media (max-width: 992px) {
-            .about-grid, .tech-grid, .solutions-grid { grid-template-columns: 1fr; }
-            .page-banner h1 { font-size: 2.2rem; }
-            .about-image { order: -1; } /* 手机端图片置顶 */
+            .hero-section { flex-direction: column; }
+            .hero-text { padding: 60px 5%; text-align: center; }
+            .hero-image { height: 400px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .intro-details { grid-template-columns: 1fr; }
+            .expert-banner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="profile.html" style="color:#00d4ff">About Us <i class="fas fa-chevron-down" style="font-size:10px"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="profile.html">Company Profile</a></li>
-                    <li><a href="#certificates">Certificates</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size:10px"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="products.html#ac-products">AC Chargers (7kW-22kW)</a></li>
-                    <li><a href="products.html#dc-products">DC Fast Chargers (60kW-480kW)</a></li>
-                    <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
-                    <li><a href="products.html#split-stack">Split Charging Stack (Up to 1680kW)</a></li>
-                </ul>
-            </li>
-            <li><a href="news.html">News & Cases</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
+    <div class="logo"><img src="logo.png" alt="ECharging Logo"></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="profile.html" style="color: var(--accent);">Company</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="news.html">News & Cases</a></li>
+    </ul>
 </header>
 
-<div class="page-banner">
-    <h1>Corporate Profile</h1>
-    <p>Professional New Energy Power Supply System Solutions</p>
+<section class="hero-section">
+    <div class="hero-text">
+        <span class="tagline">Established 2014</span>
+        <h1>Leading EV Power Systems</h1>
+        <p style="font-size: 1.2rem; color: var(--text-light);">ECharging New Energy is a high-tech pioneer specializing in high-performance charging infrastructure and smart energy management.</p>
+    </div>
+    <div class="hero-image"></div>
+</section>
+
+<div class="stats-grid">
+    <div class="stat-card"><h3>1680<small style="font-size: 1rem;">kW</small></h3><p>Power Stack</p></div>
+    <div class="stat-card"><h3>600<small style="font-size: 1rem;">kW</small></h3><p>Ultra-Fast Hub</p></div>
+    <div class="stat-card"><h3>IP54</h3><p>Weather Rating</p></div>
+    <div class="stat-card"><h3>GLOBAL</h3><p>Standards Ready</p></div>
 </div>
 
-<div class="container">
-    <div class="about-grid">
-        <div class="about-content">
-            <h2>Our Identity</h2>
-            <p><strong>ECharging New Energy</strong> is a high-tech enterprise founded in 2014, specializing in special and new technologies and deeply engaged in the application field of new energy power supply systems.</p>
-            <p>Our R&D team is composed of experts from renowned domestic and international companies such as <strong>Huawei and Emerson</strong>. The company’s new product development capability is among the leading in the industry in China, forming strong technological development and continuous innovation capabilities.</p>
-            <p>Leveraging the integration of internet technology and power automation technology, ECharging has taken the lead in providing electric vehicle operators with multi‑modal solutions that integrate charging station operations, energy storage, and photovoltaic storage services.</p>
-        </div>
-        <div class="about-image">
-            <img src="company.jpg" alt="Echarging Company Facility">
-        </div>
+<section class="intro-details">
+    <div class="detail-box">
+        <h2>Our Identity</h2>
+        <p>Deeply engaged in the field of new energy power supply, we provide multi-modal solutions that integrate charging station operations, energy storage, and PV-storage applications.</p>
+        <p>Our products comprehensively cover the needs of electric heavy-duty trucks, buses, and passenger vehicles, providing complete infrastructure and liquid-cooled ultra-fast charging technology.</p>
     </div>
-
-    <section class="tech-section">
-        <div class="tech-header">
-            <h2>Technological Advantages</h2>
-            <p style="opacity: 0.8; font-style: italic;">“More cutting-edge specifications, deeper expertise, building top‑tier power supplies!”</p>
-        </div>
-        
-        <div class="tech-grid">
-            <div class="tech-card">
-                <i class="fas fa-drafting-compass"></i>
-                <h4>Outdoor Design</h4>
-                <p>Advanced capability to design high‑power power systems specifically for complex and harsh outdoor applications.</p>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-microchip"></i>
-                <h4>Proprietary Platform</h4>
-                <p>Independently developed, highly integrated software and hardware control platform with self-developed core charging modules.</p>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-shield-alt"></i>
-                <h4>IP54 Protection</h4>
-                <p>All outdoor systems are engineered with <strong>IP54-rated</strong> protection, ensuring durability in extreme environments.</p>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-sync-alt"></i>
-                <h4>Power Conversion</h4>
-                <p>Expertise in system integration for multi-directional power conversion and multi-scenario energy storage carriers.</p>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-globe-americas"></i>
-                <h4>Global Compliance</h4>
-                <p>Comprehensive range of AC/DC stations compliant with <strong>Chinese, European, American, and Japanese</strong> standards.</p>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-car-battery"></i>
-                <h4>Innovative V2V</h4>
-                <p>Intelligent charging vehicles for roadside assistance and vehicle‑to‑vehicle energy transfer solutions.</p>
-            </div>
-        </div>
-    </section>
-
-    <div style="margin-top: 80px; text-align: center;">
-        <h2 style="color: #002b5e;">Product Portfolio</h2>
-        <p style="color: #666; max-width: 900px; margin: 20px auto;">From 7kW residential units to 1680kW industrial stacks, our products cover the charging needs of heavy-duty trucks, buses, and various passenger vehicles.</p>
-        
-        <div class="solutions-grid">
-            <div class="solution-tag"><i class="fas fa-home"></i><span>AC Chargers</span><small>7kW - 22kW</small></div>
-            <div class="solution-tag"><i class="fas fa-bolt"></i><span>DC Fast Chargers</span><small>60kW - 480kW</small></div>
-            <div class="solution-tag"><i class="fas fa-charging-station"></i><span>Ultra-Fast Hub</span><small>600kW HUB</small></div>
-            <div class="solution-tag"><i class="fas fa-server"></i><span>Split Stack</span><small>Up to 1680kW</small></div>
-        </div>
+    <div class="detail-box">
+        <h2>Innovation DNA</h2>
+        <p>We possess the capability to design high‑power power systems for complex outdoor applications, supported by an independently developed software and hardware control platform.</p>
+        <p>Leveraging internet and power automation technology, ECharging leads the market in providing innovative solutions like intelligent charging vehicles and vehicle‑to‑vehicle (V2V) energy transfer.</p>
     </div>
+</section>
 
-    <div style="margin-top: 100px; text-align: center; padding: 40px; background: #f8fbff; border-radius: 20px;">
-        <p style="font-size: 1.2rem; color: #002b5e; font-weight: 500;">We are committed to working hand in hand with all sectors of society to build a new energy world of limitless possibilities.</p>
+
+
+<div class="expert-banner">
+    <i class="fas fa-microchip"></i>
+    <div>
+        <h3>Elite R&D Expertise</h3>
+        <p>Our team is composed of industry experts from <strong>Huawei and Emerson</strong>, forming a strong core for continuous innovation and industry-leading product development.</p>
     </div>
 </div>
 
-<footer id="certificates">
-    <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p>
+<footer>
+    <p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. <br> More cutting-edge specifications, deeper expertise, building top‑tier power supplies!</p>
 </footer>
 
 </body>
