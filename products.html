@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Echarging New Energy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #fff; overflow-x: hidden; }
+        
+        /* 导航栏 */
+        header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo img { height: 45px; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+        .nav-links > li { position: relative; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
+        .nav-links > li:hover > a { color: #00d4ff; }
+        
+        /* 下拉菜单 */
+        .dropdown-content {
+            display: none; position: absolute; background: white; min-width: 230px;
+            top: 80px; left: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 3px solid #00d4ff;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .dropdown-content a:hover { background: #f5f5f5; color: #002b5e; padding-left: 28px; }
+
+        .menu-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
+
+        /* Banner */
+        .page-banner { background: #001d3d; color: white; padding: 60px 5%; text-align: center; }
+        .page-banner h1 { font-size: 3rem; margin: 0; }
+
+        /* 产品板块 */
+        .product-section { padding: 100px 0 80px 0; border-bottom: 1px solid #eee; }
+        .product-section:nth-child(even) { background: #f9fbff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 60px; align-items: center; }
+        .reverse { flex-direction: row-reverse; }
+
+        .product-image { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .product-image img { 
+            max-width: 100%; 
+            max-height: 420px; 
+            border-radius: 12px; 
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.1)); 
+            transition: 0.4s;
+        }
+        
+        .product-info { flex: 1.2; }
+        .tag { display: inline-block; background: #00d4ff; color: #002b5e; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+        .product-info h2 { font-size: 2.2rem; color: #002b5e; margin: 0 0 20px 0; }
+        
+        .tech-highlight {
+            font-size: 14.5px; color: #002b5e; font-weight: 600; background: #e6faff; 
+            padding: 15px; border-left: 5px solid #00d4ff; border-radius: 6px; margin: 20px 0;
+        }
+        .tech-highlight ul { margin: 0; padding-left: 20px; }
+
+        .spec-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .spec-table td { padding: 12px 18px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .spec-label { font-weight: bold; color: #002b5e; width: 35%; background: #f4f7f9; }
+
+        .standard-box { 
+            margin-top: 15px; padding: 12px; background: #fdfdfd; 
+            border: 1px dashed #ccc; border-radius: 6px;
+        }
+        .standard-title { font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        .standard-text { font-size: 11.5px; color: #777; line-height: 1.4; display: block; }
+
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px);
+                background: #002b5e; flex-direction: column; align-items: center; transition: 0.4s; padding-top: 40px;
+            }
+            .nav-links.active { right: 0; }
+            .container, .reverse { flex-direction: column !important; text-align: center; gap: 30px; }
+            .dropdown-content { position: static; background: #001d3d; width: 100%; }
+        }
+
+        footer { background: #1a1a1a; color: #ccc; padding: 40px 0; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="profile.html">Company Profile</a></li>
+                    <li><a href="profile.html#certificates">Certificates</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="products.html" style="color: #00d4ff;">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="products.html#ac-products">AC Chargers</a></li>
+                    <li><a href="products.html#dc-products">DC Fast Chargers</a></li>
+                    <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
+                    <li><a href="products.html#split-stack">Split Charging Stack</a></li>
+                </ul>
+            </li>
+            <li><a href="news.html">News & Cases</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="page-banner">
+    <h1>Our Charging Solutions</h1>
+    <p>High-reliability energy technology with Huawei & Emerson heritage.</p>
+</div>
+
+<section class="product-section" id="ac-products">
+    <div class="container">
+        <div class="product-image"><img src="ac-charger.png" alt="AC Charger"></div>
+        <div class="product-info">
+            <span class="tag">Home & Commercial</span>
+            <h2>AC Series (7kW - 22kW)</h2>
+            <div class="tech-highlight">
+                <ul>
+                    <li><strong>Smart:</strong> Remote upgrades, App control, and remote diagnosis.</li>
+                    <li><strong>Safety:</strong> Type A+DC 6mA RCD protection and IP54 rated.</li>
+                </ul>
+            </div>
+            <table class="spec-table">
+                <tr><td class="spec-label">Power Output</td><td>7kW / 11kW / 22kW</td></tr>
+                <tr><td class="spec-label">Interface</td><td>Type 2 (IEC 62196-2)</td></tr>
+                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<section class="product-section" id="dc-products">
+    <div class="container reverse">
+        <div class="product-image"><img src="dc-charger.png" alt="DC Fast Charger"></div>
+        <div class="product-info">
+            <span class="tag">Commercial & Public</span>
+            <h2>DC Fast Charger (60kW - 480kW)</h2>
+            <div class="tech-highlight">
+                <ul>
+                    <li><strong>Dual Output:</strong> Supports dual-connector parallel charging.</li>
+                    <li><strong>Efficiency:</strong> Peak efficiency ≥ 96% with smart power allocation.</li>
+                </ul>
+            </div>
+            <table class="spec-table">
+                <tr><td class="spec-label">Power Range</td><td>60kW - 480kW</td></tr>
+                <tr><td class="spec-label">Protection</td><td>IP54 / IK10 Rated</td></tr>
+                <tr><td class="spec-label">Voltage Range</td><td>200V - 1000V DC</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="product-section" id="ultra-hub">
+    <div class="container">
+        <div class="product-image"><img src="ultra-hub.png" alt="600kW Ultra-Fast Hub"></div>
+        <div class="product-info">
+            <span class="tag">Liquid-Cooled Technology</span>
+            <h2>600kW Ultra-Fast Hub</h2>
+            <div class="tech-highlight">
+                <i class="fas fa-bolt"></i> High-power liquid cooling supporting up to 600A/800A per connector.
+            </div>
+            <table class="spec-table">
+                <tr><td class="spec-label">Max Power</td><td>600kW</td></tr>
+                <tr><td class="spec-label">Cooling System</td><td>Advanced Liquid Cooling</td></tr>
+                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<section class="product-section" id="split-stack">
+    <div class="container reverse">
+        <div class="product-image"><img src="charging-stack.png" alt="Split Charging Stack"></div>
+        <div class="product-info">
+            <span class="tag">Scalable Infrastructure</span>
+            <h2>Split Charging Stack</h2>
+            <div class="tech-highlight">
+                <ul>
+                    <li><strong>Total Power:</strong> Scalable architecture up to 1680kW.</li>
+                    <li><strong>Flexibility:</strong> Dynamic power sharing across multiple dispensers.</li>
+                </ul>
+            </div>
+            <table class="spec-table">
+                <tr><td class="spec-label">System Capacity</td><td>720kW - 1680kW</td></tr>
+                <tr><td class="spec-label">Module Options</td><td>40kW / 60kW Hot-Swappable</td></tr>
+                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<footer><p>&copy; 2026 Echarging New Energy (Shenzhen) Co., Ltd. All Rights Reserved.</p></footer>
+
+<script>
+    // 手机端导航逻辑
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    menuToggle.onclick = () => {
+        navList.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    };
+
+    // 解决手机端下拉菜单点击逻辑
+    document.querySelectorAll('.dropdown > a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                const parent = link.parentElement;
+                if (!parent.classList.contains('active')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+                    parent.classList.add('active');
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

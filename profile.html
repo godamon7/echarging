@@ -6,11 +6,11 @@
     <title>Company Profile | Echarging New Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 基础样式复用首页 */
+        /* 基础样式复用 */
         html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #fff; overflow-x: hidden; }
         
-        /* 导航栏与下拉菜单 */
+        /* 导航栏 */
         header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .logo img { height: 45px; width: auto; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
@@ -20,127 +20,86 @@
         .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
 
-        /* 手机端菜单开关按钮 */
         .menu-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
         
         /* 下拉菜单 */
         .dropdown-content {
-            display: none; position: absolute; background-color: #ffffff; min-width: 220px;
+            display: none; position: absolute; background-color: #ffffff; min-width: 230px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0; padding: 10px 0; border-top: 3px solid #00d4ff; 
         }
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 25px; }
 
-        /* --- 响应式手机端适配 --- */
-        @media (max-width: 992px) {
-            .menu-toggle { display: block; }
-            .nav-links {
-                position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px);
-                background: #002b5e; flex-direction: column; align-items: center;
-                transition: 0.4s ease-in-out; padding-top: 30px; z-index: 999;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links > li { width: 100%; text-align: center; }
-            .nav-links > li > a { line-height: 60px; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-            
-            .dropdown-content { position: static; background: #001d3d; box-shadow: none; border-top: none; width: 100%; }
-            .dropdown.active .dropdown-content { display: block; }
-            .dropdown-content a { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-            /* Profile 页面板块适配 */
-            .page-banner h1 { font-size: 2.2rem; }
-            .page-banner p { font-size: 1.1rem; }
-            .about-section { flex-direction: column; text-align: center; gap: 30px; }
-            .about-text h2::after { left: 50%; transform: translateX(-50%); }
-            .vision-slogan blockquote { font-size: 1.5rem; }
-        }
-
-        /* Profile 顶部 Banner */
+        /* Banner */
         .page-banner {
-            height: 450px;
-            background: linear-gradient(rgba(0,43,94,0.75), rgba(0,43,94,0.75)), 
-                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+            height: 400px;
+            background: linear-gradient(rgba(0,43,94,0.7), rgba(0,43,94,0.7)), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600') center/cover;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; text-align: center; margin-top: -80px; padding: 0 20px;
+            color: white; text-align: center; padding: 0 20px;
         }
-        .page-banner h1 { font-size: 3.5rem; margin: 0; letter-spacing: 2px; font-weight: 700; }
-        .page-banner p { font-size: 1.4rem; opacity: 0.9; margin-top: 15px; max-width: 850px; font-weight: 300; }
+        .page-banner h1 { font-size: 3rem; margin: 0; }
 
         /* 内容容器 */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        .about-section { display: flex; gap: 60px; align-items: center; margin-bottom: 40px; }
+        .about-section { display: flex; gap: 60px; align-items: center; }
         .about-text { flex: 1.2; }
         .about-text h2 { color: #002b5e; font-size: 2.5rem; margin-bottom: 25px; position: relative; padding-bottom: 15px; }
         .about-text h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 4px; background: #00d4ff; }
-        .about-text p { font-size: 1.1rem; color: #444; margin-bottom: 20px; line-height: 1.8; }
         .about-img { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .about-img img { width: 100%; display: block; transition: 0.5s; }
+        .about-img img { width: 100%; display: block; }
 
         /* 技术优势 */
-        .tech-advantages { background: #001d3d; color: white; padding: 100px 20px; }
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 50px; }
-        .tech-item { background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 20px; text-align: center; transition: 0.4s; border: 1px solid rgba(255,255,255,0.1); }
-        .tech-item:hover { background: #00d4ff; transform: translateY(-10px); }
-        .tech-item i { font-size: 3rem; color: #00d4ff; margin-bottom: 25px; }
-        .tech-item h4 { margin: 0; font-size: 1.2rem; }
+        .tech-advantages { background: #001d3d; color: white; padding: 80px 20px; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+        .tech-item { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .tech-item i { font-size: 2.5rem; color: #00d4ff; margin-bottom: 20px; }
 
         /* 产品线范围 */
-        .product-range { padding: 100px 20px; text-align: center; background: #f8fbff; }
-        .range-cards { display: flex; gap: 30px; justify-content: center; margin-top: 60px; flex-wrap: wrap; }
-        .range-card { background: white; padding: 50px 30px; border-radius: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.05); flex: 1; min-width: 300px; }
-        .range-card h3 { color: #002b5e; font-size: 2.2rem; margin: 15px 0; }
+        .product-range { padding: 80px 20px; text-align: center; background: #f8fbff; }
+        .range-cards { display: flex; gap: 20px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+        .range-card { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); flex: 1; min-width: 250px; border-bottom: 4px solid #00d4ff; }
+        .range-card span { font-size: 0.9rem; color: #00d4ff; font-weight: bold; }
+        .range-card h3 { color: #002b5e; font-size: 1.8rem; margin: 10px 0; }
 
-        /* 愿景标语区域 */
-        .vision-slogan { 
-            background: linear-gradient(135deg, #00d4ff 0%, #002b5e 100%); 
-            padding: 100px 20px; 
-            text-align: center; 
-            color: white; 
-        }
-        .vision-slogan blockquote { 
-            font-size: 2.2rem; 
-            font-weight: 700; 
-            margin: 0 auto; 
-            border: none; 
-            max-width: 1000px;
-            line-height: 1.4;
-        }
-        .vision-slogan p { 
-            font-size: 1.4rem; 
-            margin-top: 30px; 
-            opacity: 0.95; 
-            font-weight: 400;
-        }
+        .vision-slogan { background: linear-gradient(135deg, #00d4ff 0%, #002b5e 100%); padding: 80px 20px; text-align: center; color: white; }
+        .vision-slogan blockquote { font-size: 1.8rem; font-style: italic; max-width: 800px; margin: 0 auto; }
 
-        footer { background: #1a1a1a; color: #888; padding: 60px 10%; text-align: center; font-size: 0.9rem; }
+        footer { background: #1a1a1a; color: #888; padding: 40px 10%; text-align: center; }
+
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-links { position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px); background: #002b5e; flex-direction: column; transition: 0.4s; padding-top: 40px; align-items: center; }
+            .nav-links.active { right: 0; }
+            .nav-links > li > a { line-height: 60px; font-size: 18px; }
+            .about-section { flex-direction: column; text-align: center; }
+            .dropdown-content { position: static; background-color: #001d3d; width: 100%; box-shadow: none; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging New Energy"></a>
-        
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="fas fa-bars"></i>
-        </div>
-
+        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="nav-list">
             <li><a href="index.html">Home</a></li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-btn" style="color:#00d4ff;">About Us <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <a href="profile.html" style="color: #00d4ff;">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="profile.html">Company Profile</a></li>
                     <li><a href="#certificates">Certificates</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-btn">Products <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">AC Chargers</a></li>
-                    <li><a href="#">DC Fast Chargers (60kW-480kW)</a></li>
-                    <li><a href="#">Split Charging Stack (720kW-1680kW)</a></li>
+                    <li><a href="products.html#ac-products">AC Chargers</a></li>
+                    <li><a href="products.html#dc-products">DC Fast Chargers</a></li>
+                    <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
+                    <li><a href="products.html#split-stack">Split Charging Stack</a></li>
                 </ul>
             </li>
             <li><a href="news.html">News & Cases</a></li>
@@ -151,48 +110,47 @@
 
 <section class="page-banner">
     <h1>About Our Company</h1>
-    <p>Innovatively fulfilling customers' visions with deeper expertise.</p>
+    <p>Empowering the world with leading-edge energy technology.</p>
 </section>
 
 <div class="container">
     <div class="about-section">
         <div class="about-text">
             <h2>Who We Are</h2>
-            <p>ECharging New Energy is a high-tech enterprise founded in 2014, specializing in "specialized and innovative" technologies and deeply engaged in the application field of new energy power supply systems.</p>
-            <p>Our R&D team is composed of experts from renowned domestic and international giants such as <strong>Huawei and Emerson</strong>. This elite pedigree ensures our product development capability remains at the forefront of the global industry.</p>
+            <p>ECharging New Energy is a high-tech enterprise specializing in "specialized and innovative" energy technologies. Our core R&D team is composed of industry veterans from <strong>Huawei and Emerson</strong>, ensuring our products stand at the global forefront of power conversion and smart charging technology.</p>
+            <p>With a focus on high-power efficiency and industrial reliability, we provide end-to-end charging solutions for residential, commercial, and public infrastructure worldwide.</p>
         </div>
         <div class="about-img">
-            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Advanced R&D Facility">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="R&D Team">
         </div>
     </div>
 </div>
 
 <section class="tech-advantages">
-    <div class="container" style="padding: 0;">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 60px;">Technological Core</h2>
+    <div class="container">
+        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 50px;">Our Core Strength</h2>
         <div class="tech-grid">
-            <div class="tech-item"><i class="fas fa-bolt"></i><h4>High‑power System Design</h4></div>
-            <div class="tech-item"><i class="fas fa-microchip"></i><h4>Independent SW/HW Platforms</h4></div>
-            <div class="tech-item"><i class="fas fa-network-wired"></i><h4>Power Conversion Integration</h4></div>
-            <div class="tech-item"><i class="fas fa-leaf"></i><h4>Solar & Storage Technology</h4></div>
+            <div class="tech-item"><i class="fas fa-bolt"></i><h4>High‑Power Design</h4><p>Industry-leading power density and efficiency optimized for fast charging.</p></div>
+            <div class="tech-item"><i class="fas fa-microchip"></i><h4>Proprietary Platform</h4><p>Full control over software and hardware R&D for seamless integration.</p></div>
+            <div class="tech-item"><i class="fas fa-shield-alt"></i><h4>IP54 Reliability</h4><p>Rugged designs engineered to withstand harsh outdoor environments.</p></div>
         </div>
     </div>
 </section>
 
 <section class="product-range">
-    <div class="container" style="padding: 0;">
-        <h2 style="color: #002b5e; font-size: 2.5rem;">Global Solutions Range</h2>
+    <div class="container">
+        <h2>Global Solutions Portfolio</h2>
         <div class="range-cards">
-            <div class="range-card"><span>AC Solutions</span><h3>7kW - 22kW</h3><p>Smart wallbox & floor-stand solutions.</p></div>
-            <div class="range-card"><span>DC Fast Charging</span><h3>60kW - 480kW</h3><p>High-efficiency rapid public charging.</p></div>
-            <div class="range-card"><span>Ultra-Power Stacks</span><h3>720kW - 1680kW</h3><p>Liquid-cooled ultra-fast hub applications.</p></div>
+            <div class="range-card"><span>AC Series</span><h3>7kW - 22kW</h3></div>
+            <div class="range-card"><span>DC Fast</span><h3>60kW - 480kW</h3></div>
+            <div class="range-card"><span>Ultra-Fast Hub</span><h3>600kW</h3></div>
+            <div class="range-card"><span>Split Stack</span><h3>1680kW</h3></div>
         </div>
     </div>
 </section>
 
-<section class="vision-slogan">
-    <blockquote>“With more cutting-edge specifications and deeper expertise, we innovatively fulfill customers' visions.”</blockquote>
-    <p>We join hands with all to build a new energy world of limitless possibilities.</p>
+<section class="vision-slogan" id="certificates">
+    <blockquote>"Innovatively fulfilling customers' visions with deeper expertise and reliable energy solutions."</blockquote>
 </section>
 
 <footer>
@@ -200,24 +158,25 @@
 </footer>
 
 <script>
-    // 手机端菜单开关逻辑
+    // 手机端菜单切换
     const menuToggle = document.getElementById('mobile-menu');
     const navList = document.getElementById('nav-list');
-
     menuToggle.addEventListener('click', () => {
         navList.classList.toggle('active');
-        const icon = menuToggle.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
     });
 
-    // 手机端下拉菜单点击逻辑
-    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
-    dropdownBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    // 手机端下拉逻辑适配
+    document.querySelectorAll('.dropdown > a').forEach(link => {
+        link.addEventListener('click', (e) => {
             if (window.innerWidth <= 992) {
-                e.preventDefault();
-                btn.parentElement.classList.toggle('active');
+                const parent = link.parentElement;
+                if (!parent.classList.contains('active')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+                    parent.classList.add('active');
+                }
             }
         });
     });

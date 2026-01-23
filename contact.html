@@ -25,7 +25,7 @@
 
         /* 下拉菜单样式 */
         .dropdown-content {
-            display: none; position: absolute; background-color: #ffffff; min-width: 200px;
+            display: none; position: absolute; background-color: #ffffff; min-width: 250px;
             box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0; padding: 10px 0; border-top: 3px solid #00d4ff; 
         }
         .dropdown:hover .dropdown-content { display: block; }
@@ -56,7 +56,7 @@
         .office-block { margin-bottom: 40px; }
         .office-block h3 { color: #002b5e; font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
         .office-block h3 i { color: #00d4ff; }
-        .office-block p { color: #555; margin-left: 35px; }
+        .office-block p { color: #555; margin-left: 35px; line-height: 1.8; }
 
         .details-list { border-top: 1px solid #eee; padding-top: 30px; }
         .details-list a { display: flex; align-items: center; gap: 15px; color: #333; text-decoration: none; margin-bottom: 20px; font-weight: 500; transition: 0.3s; }
@@ -87,9 +87,8 @@
             
             .dropdown-content { position: static; background: #001d3d; box-shadow: none; border-top: none; width: 100%; }
             .dropdown.active .dropdown-content { display: block; }
-            .dropdown-content a { color: #fff; }
+            .dropdown-content a { color: #fff; padding-left: 0; text-align: center; }
 
-            /* 内容调整 */
             .contact-hero h1 { font-size: 2.2rem; }
             .container { grid-template-columns: 1fr; margin: -50px auto 50px; }
             .contact-info, .contact-form { padding: 30px 20px; }
@@ -110,18 +109,19 @@
         <ul class="nav-links" id="nav-list">
             <li><a href="index.html">Home</a></li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-btn">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <a href="profile.html" class="dropdown-btn">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="profile.html">Company Profile</a></li>
                     <li><a href="profile.html#certificates">Certificates</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-btn">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
+                <a href="products.html" class="dropdown-btn">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">AC Chargers</a></li>
-                    <li><a href="#">DC Fast Chargers (60kW-480kW)</a></li>
-                    <li><a href="#">Split Charging Stack (720kW-1680kW)</a></li>
+                    <li><a href="products.html#ac-products">AC Chargers</a></li>
+                    <li><a href="products.html#dc-products">DC Fast Chargers (60kW-480kW)</a></li>
+                    <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
+                    <li><a href="products.html#split-stack">Split Charging Stack (720kW-1680kW)</a></li>
                 </ul>
             </li>
             <li><a href="news.html">News & Cases</a></li>
@@ -132,14 +132,14 @@
 
 <section class="contact-hero">
     <h1>Get In Touch</h1>
-    <p>Empowering the world with leading EV charging solutions. Contact us for professional support.</p>
+    <p>Empowering the world with leading-edge EV charging technology. Contact us for professional project support and inquiries.</p>
 </section>
 
 <div class="container">
     <div class="contact-info">
         <div class="office-block">
             <h3><i class="fas fa-map-marked-alt"></i> Nanshan R&D Center</h3>
-            <p>305-306, Building F, Qihang Science and Innovation R&D Industrial Park, No. 1008, Songbai Road, Xili street, Nanshan District, Shenzhen</p>
+            <p>305-306, Building F, Qihang Science and Innovation R&D Industrial Park, No. 1008, Songbai Road, Xili Street, Nanshan District, Shenzhen</p>
         </div>
 
         <div class="office-block">
@@ -159,7 +159,7 @@
         <form action="#">
             <div class="form-group"><input type="text" placeholder="Full Name" required></div>
             <div class="form-group"><input type="email" placeholder="Email Address" required></div>
-            <div class="form-group"><textarea rows="5" placeholder="How can we help you?"></textarea></div>
+            <div class="form-group"><textarea rows="5" placeholder="How can we help you regarding our AC/DC charging solutions?" required></textarea></div>
             <button type="submit" class="submit-btn">SEND INQUIRY</button>
         </form>
     </div>
@@ -186,6 +186,7 @@
     dropdownBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             if (window.innerWidth <= 992) {
+                // 仅在移动端阻止默认行为以支持展开菜单
                 e.preventDefault();
                 btn.parentElement.classList.toggle('active');
             }
