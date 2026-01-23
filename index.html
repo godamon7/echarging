@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echarging New Energy | Global EV Charging Solutions</title>
+    <title>Home | Echarging New Energy - Leading EV Charging Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* 基础样式 */
@@ -13,57 +13,69 @@
         /* 导航栏 */
         header { background: #002b5e; color: white; padding: 0 5%; position: sticky; top: 0; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo img { height: 45px; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
-        
+        .logo img { height: 45px; width: auto; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
+
         .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
         .nav-links > li { position: relative; }
         .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
 
+        .menu-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
+        
         /* 下拉菜单 */
         .dropdown-content {
-            display: none; position: absolute; background: white; min-width: 240px;
-            top: 80px; left: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 3px solid #00d4ff;
+            display: none; position: absolute; background-color: #ffffff; min-width: 260px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1); top: 80px; left: 0; padding: 10px 0; border-top: 3px solid #00d4ff; 
         }
         .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .dropdown-content a:hover { background: #f5f5f5; color: #002b5e; padding-left: 28px; }
+        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; text-align: left; }
+        .dropdown-content a:hover { background-color: #f5f5f5; color: #002b5e; padding-left: 25px; }
 
-        /* 手机端菜单按钮 */
-        .menu-toggle { display: none; font-size: 24px; color: white; cursor: pointer; }
-
-        /* Hero 主视觉区 */
-        .hero { 
-            height: 80vh; 
-            background: linear-gradient(rgba(0,43,94,0.6), rgba(0,43,94,0.6)), url('hero-bg.jpg') center/cover; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        /* Hero Banner */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,43,94,0.6), rgba(0,43,94,0.6)), 
+                        url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: white; text-align: center; padding: 0 20px;
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.5rem; max-width: 800px; margin-bottom: 30px; }
-        .btn-primary { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; }
-        .btn-primary:hover { background: white; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; }
+        .hero p { font-size: 1.4rem; max-width: 800px; margin-bottom: 35px; }
+        .btn-primary { background: #00d4ff; color: #002b5e; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; }
+        .btn-primary:hover { background: white; transform: scale(1.05); }
 
-        /* 产品预览区 */
-        .features { padding: 80px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .feature-card { padding: 40px; text-align: center; border-radius: 15px; background: #f9f9f9; transition: 0.3s; }
-        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .feature-card i { font-size: 3rem; color: #00d4ff; margin-bottom: 20px; }
-        .feature-card h3 { color: #002b5e; font-size: 1.5rem; }
+        /* 产品核心参数展示 */
+        .home-products { padding: 80px 5%; text-align: center; background: #f8fbff; }
+        .home-products h2 { color: #002b5e; font-size: 2.5rem; margin-bottom: 50px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .product-card { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 5px solid #00d4ff; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-card i { font-size: 3rem; color: #002b5e; margin-bottom: 20px; }
+        .product-card h3 { margin: 15px 0; font-size: 1.5rem; }
+        .product-card .power-range { color: #00d4ff; font-weight: bold; font-size: 1.3rem; margin-bottom: 10px; display: block; }
+        .product-card p { color: #666; font-size: 0.95rem; }
 
-        footer { background: #1a1a1a; color: #ccc; padding: 40px 5%; text-align: center; }
+        /* 优势介绍 */
+        .features { padding: 80px 5%; display: flex; align-items: center; gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .features-img { flex: 1; border-radius: 20px; overflow: hidden; }
+        .features-img img { width: 100%; display: block; }
+        .features-text { flex: 1; }
+        .features-text h2 { color: #002b5e; font-size: 2.2rem; }
+        .feature-item { margin-bottom: 20px; display: flex; gap: 15px; }
+        .feature-item i { color: #00d4ff; font-size: 1.5rem; margin-top: 5px; }
+
+        footer { background: #1a1a1a; color: #888; padding: 50px 5%; text-align: center; }
 
         /* 响应式适配 */
         @media (max-width: 992px) {
             .menu-toggle { display: block; }
-            .nav-links {
-                position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px);
-                background: #002b5e; flex-direction: column; align-items: center; transition: 0.4s; padding-top: 40px;
-            }
+            .nav-links { position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px); background: #002b5e; flex-direction: column; align-items: center; transition: 0.4s; padding-top: 40px; }
             .nav-links.active { right: 0; }
             .nav-links > li > a { line-height: 60px; font-size: 18px; }
-            .dropdown-content { position: static; background: #001d3d; box-shadow: none; width: 100%; text-align: center; }
-            .dropdown.active .dropdown-content { display: block; }
+            .dropdown-content { position: static; background: #001d3d; width: 100%; box-shadow: none; text-align: center; }
+            .dropdown-content a { color: #fff; text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .features { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -71,29 +83,26 @@
 
 <header>
     <nav>
-        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="Echarging Logo"></a>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="nav-list">
             <li><a href="index.html" style="color: #00d4ff;">Home</a></li>
-            
             <li class="dropdown">
-                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 10px;"></i></a>
+                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="profile.html">Company Profile</a></li>
                     <li><a href="profile.html#certificates">Certificates</a></li>
                 </ul>
             </li>
-            
             <li class="dropdown">
-                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size: 10px;"></i></a>
+                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="products.html#ac-products">AC Chargers (7-22kW)</a></li>
-                    <li><a href="products.html#dc-products">DC Fast Chargers (60-480kW)</a></li>
+                    <li><a href="products.html#ac-products">AC Chargers (7kW-22kW)</a></li>
+                    <li><a href="products.html#dc-products">DC Fast Chargers (60kW-480kW)</a></li>
                     <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
-                    <li><a href="products.html#split-stack">Split Charging Stack (720-1680kW)</a></li>
+                    <li><a href="products.html#split-stack">Split Charging Stack (Up to 1680kW)</a></li>
                 </ul>
             </li>
-            
             <li><a href="news.html">News & Cases</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
@@ -101,26 +110,62 @@
 </header>
 
 <section class="hero">
-    <h1>Future-Ready EV Infrastructure</h1>
-    <p>Empowered by Huawei & Emerson expertise. Leading the global transition to sustainable mobility with high-power charging solutions.</p>
+    <h1>Smart Charging, Green Future</h1>
+    <p>Providing high-performance EV charging infrastructure with industry-leading expertise from Huawei & Emerson veterans.</p>
     <a href="products.html" class="btn-primary">Explore Products</a>
 </section>
 
+<section class="home-products">
+    <h2>Our Core Solutions</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <i class="fas fa-bolt"></i>
+            <h3>DC Fast Chargers</h3>
+            <span class="power-range">60kW - 480kW</span>
+            <p>Reliable IP54-rated standalone units for diverse commercial scenarios.</p>
+        </div>
+        <div class="product-card">
+            <i class="fas fa-charging-station"></i>
+            <h3>Ultra-Fast Hub</h3>
+            <span class="power-range">600kW HUB</span>
+            <p>Next-gen high-power hub for rapid energy replenishment in urban centers.</p>
+        </div>
+        <div class="product-card">
+            <i class="fas fa-layer-group"></i>
+            <h3>Split Charging Stack</h3>
+            <span class="power-range">Up to 1680kW</span>
+            <p>Scalable centralized solution for heavy-duty truck and bus terminals.</p>
+        </div>
+    </div>
+</section>
+
 <section class="features">
-    <div class="feature-card">
-        <i class="fas fa-bolt"></i>
-        <h3>Ultra-Fast Charging</h3>
-        <p>Up to 600kW per hub and 1680kW per stack, supporting liquid-cooled technology for next-gen EVs.</p>
+    <div class="features-img">
+        <img src="https://images.unsplash.com/photo-1558444458-5f75bc9091c8?auto=format&fit=crop&q=80&w=800" alt="Technology">
     </div>
-    <div class="feature-card">
-        <i class="fas fa-shield-alt"></i>
-        <h3>Industrial Reliability</h3>
-        <p>All products are IP54 rated with comprehensive safety certifications for harsh environments.</p>
-    </div>
-    <div class="feature-card">
-        <i class="fas fa-globe"></i>
-        <h3>Global Success</h3>
-        <p>Proven track record with 500+ projects across China, SE Asia, and Europe.</p>
+    <div class="features-text">
+        <h2>Why Choose Echarging?</h2>
+        <div class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>Expert R&D Team</strong>
+                <p>Core engineers from top-tier power conversion giants (Huawei/Emerson).</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>Industrial Reliability</strong>
+                <p>All outdoor units feature IP54 protection for harsh environments.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>Global Compliance</strong>
+                <p>Supporting IEC, GB/T, and OCPP standards for worldwide interoperability.</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -129,28 +174,25 @@
 </footer>
 
 <script>
-    // 手机端菜单切换
+    // 移动端菜单切换
     const menuToggle = document.getElementById('mobile-menu');
     const navList = document.getElementById('nav-list');
-
     menuToggle.addEventListener('click', () => {
         navList.classList.toggle('active');
         menuToggle.querySelector('i').classList.toggle('fa-bars');
         menuToggle.querySelector('i').classList.toggle('fa-times');
     });
 
-    // 手机端下拉菜单点击逻辑 (仅在窄屏下拦截第一次点击)
+    // 移动端下拉菜单适配
     document.querySelectorAll('.dropdown > a').forEach(link => {
         link.addEventListener('click', (e) => {
             if (window.innerWidth <= 992) {
                 const parent = link.parentElement;
+                // 如果是移动端，第一次点击展开菜单，阻止跳转
                 if (!parent.classList.contains('active')) {
-                    e.preventDefault(); // 展开菜单
+                    e.preventDefault();
                     document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
                     parent.classList.add('active');
-                } else {
-                    // 如果已经展开了，再次点击则允许跳转
-                    window.location.href = link.getAttribute('href');
                 }
             }
         });
