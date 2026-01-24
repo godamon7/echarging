@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News & Cases | Echarging New Energy</title>
+    <title>Global Success Cases | Echarging New Energy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* 基础样式 */
+        html { scroll-behavior: smooth; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; background: #fff; }
         
         /* 导航栏 */
@@ -14,45 +15,53 @@
         nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
         .logo img { height: 45px; background: rgba(255, 255, 255, 0.8); padding: 5px 12px; border-radius: 6px; }
         .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-        .nav-links > li { position: relative; }
-        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; display: block; line-height: 80px; transition: 0.3s; }
+        .nav-links > li > a { color: white; text-decoration: none; padding: 0 20px; font-size: 15px; font-weight: 500; transition: 0.3s; }
         .nav-links > li:hover > a { color: #00d4ff; }
 
-        /* 下拉菜单 */
-        .dropdown-content { display: none; position: absolute; background: white; min-width: 230px; top: 80px; left: 0; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-top: 3px solid #00d4ff; }
-        .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { color: #333; padding: 12px 20px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .dropdown-content a:hover { background: #f5f5f5; color: #002b5e; padding-left: 28px; }
-
-        /* 内容区布局 */
-        .page-banner { background: #001d3d; color: white; padding: 60px 5%; text-align: center; }
+        /* 页面标题 */
+        .page-banner { background: #001d3d; color: white; padding: 80px 5%; text-align: center; }
         .page-banner h1 { font-size: 3rem; margin: 0; }
+        .page-banner p { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
 
-        .cases-grid { max-width: 1200px; margin: 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        /* 案例三并排布局 */
+        .cases-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         
-        .case-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s; border-bottom: 4px solid #00d4ff; }
-        .case-card:hover { transform: translateY(-10px); }
-        .case-img-box { height: 200px; background: #eee; position: relative; }
-        .case-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .case-info { padding: 20px; }
-        .case-tag { background: #002b5e; color: #00d4ff; font-size: 11px; padding: 3px 10px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
-        .case-info h3 { color: #002b5e; margin: 15px 0 10px 0; }
+        .case-card { 
+            background: white; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s ease; 
+            border-bottom: 4px solid #00d4ff; cursor: pointer;
+        }
+        .case-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        
+        .case-image { height: 240px; overflow: hidden; position: relative; }
+        .case-image img { width: 100%; height: 100%; object-fit: cover; }
+        .case-badge { position: absolute; top: 15px; left: 15px; background: #002b5e; color: #00d4ff; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        
+        .case-content { padding: 25px; }
+        .case-content h3 { color: #002b5e; margin: 0 0 10px 0; font-size: 1.5rem; }
+        .case-content p { color: #666; font-size: 0.95rem; margin-bottom: 15px; }
+        .btn-explore { color: #00d4ff; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 8px; }
 
-        /* 详情弹窗 */
-        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 5% auto; padding: 30px; width: 85%; max-width: 950px; border-radius: 15px; max-height: 80vh; overflow-y: auto; position: relative; }
-        .close { position: absolute; right: 20px; top: 15px; font-size: 30px; cursor: pointer; color: #666; }
-        .detail-list { margin-top: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .detail-card { background: #f4f7f9; padding: 20px; border-radius: 10px; border-left: 4px solid #002b5e; }
-        .detail-card h4 { color: #002b5e; margin: 0 0 10px 0; font-size: 16px; }
-        .detail-card p { margin: 0; font-size: 14px; color: #555; line-height: 1.5; }
+        /* 详情弹窗 (Modal) */
+        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); overflow-y: auto; }
+        .modal-content { background: #fff; margin: 50px auto; padding: 40px; width: 90%; max-width: 1100px; border-radius: 15px; position: relative; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #333; }
+        
+        .modal-header { border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; margin-bottom: 30px; }
+        .modal-header h2 { color: #002b5e; margin: 0; font-size: 2rem; }
 
-        @media (max-width: 900px) { 
-            .cases-grid, .detail-list { grid-template-columns: 1fr; }
-            .page-banner h1 { font-size: 2rem; }
+        .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .detail-item { background: #f9f9f9; padding: 20px; border-radius: 10px; border-left: 5px solid #00d4ff; }
+        .detail-item h4 { margin: 0 0 10px 0; color: #002b5e; font-size: 1.2rem; }
+        .detail-item p { margin: 0; font-size: 0.9rem; color: #555; }
+        .detail-tag { font-size: 11px; font-weight: bold; background: #002b5e; color: white; padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; display: inline-block; }
+
+        @media (max-width: 992px) {
+            .cases-container { grid-template-columns: 1fr; }
+            .detail-grid { grid-template-columns: 1fr; }
         }
 
-        footer { background: #1a1a1a; color: #ccc; padding: 40px 0; text-align: center; margin-top: 50px; }
+        footer { background: #1a1a1a; color: #ccc; padding: 40px 0; text-align: center; }
     </style>
 </head>
 <body>
@@ -62,65 +71,61 @@
         <a href="index.html" class="logo"><img src="logo.png" alt="Echarging"></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="profile.html">About Us <i class="fas fa-chevron-down" style="font-size:10px"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="profile.html">Company Profile</a></li>
-                    <li><a href="profile.html#certificates">Certificates</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="products.html">Products <i class="fas fa-chevron-down" style="font-size:10px"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="products.html#ac-products">AC Chargers</a></li>
-                    <li><a href="products.html#dc-products">DC Fast Chargers</a></li>
-                    <li><a href="products.html#ultra-hub">600kW Ultra-Fast Hub</a></li>
-                    <li><a href="products.html#split-stack">Split Charging Stack</a></li>
-                </ul>
-            </li>
-            <li><a href="news.html" style="color:#00d4ff">News & Cases</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="news.html" style="color: #00d4ff;">News & Cases</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="page-banner">
-    <h1>Global Success Cases</h1>
-    <p>5000+ High-Performance Charging Units across 20+ Provinces and Global Markets</p>
+    <h1>Global Success Stories</h1>
+    <p>Proven reliability with over 5000+ infrastructure projects worldwide.</p>
 </div>
 
-<section class="cases-grid">
-    <div class="case-card" onclick="showCases('china')">
-        <div class="case-img-box"><img src="china-main.jpg" alt="China Cases"></div>
-        <div class="case-info">
-            <span class="case-tag">China</span>
-            <h3>Nationwide Infrastructure</h3>
-            <p>Leading the shift with heavy-duty liquid-cooled stacks and smart urban hubs.</p>
+<section class="cases-container">
+    <div class="case-card" onclick="openModal('china')">
+        <div class="case-image">
+            <img src="china-main.jpg" alt="China Projects">
+            <div class="case-badge">CHINA - 5000+ PROJECTS</div>
+        </div>
+        <div class="case-content">
+            <h3>Domestic Leader</h3>
+            <p>Comprehensive coverage in 20+ provinces, specializing in heavy-duty logistics hubs and high-tech industrial parks.</p>
+            <div class="btn-explore">View Detailed Cases <i class="fas fa-chevron-right"></i></div>
         </div>
     </div>
-    <div class="case-card" onclick="showCases('asia')">
-        <div class="case-img-box"><img src="asia-main.jpg" alt="Asia Cases"></div>
-        <div class="case-info">
-            <span class="case-tag">Asia (Thailand/Myanmar)</span>
-            <h3>Regional Expansion</h3>
-            <p>Driving EV growth in Thailand's highway networks and logistics terminals.</p>
+
+    <div class="case-card" onclick="openModal('asia')">
+        <div class="case-image">
+            <img src="asia-main.jpg" alt="Asia Projects">
+            <div class="case-badge">ASIA</div>
+        </div>
+        <div class="case-content">
+            <h3>Emerging Market Focus</h3>
+            <p>Strategic charging networks across Thailand, Myanmar, and Vietnam, supporting Southeast Asia's green transition.</p>
+            <div class="btn-explore">View Detailed Cases <i class="fas fa-chevron-right"></i></div>
         </div>
     </div>
-    <div class="case-card" onclick="showCases('europe')">
-        <div class="case-img-box"><img src="europe-main.jpg" alt="Europe Cases"></div>
-        <div class="case-info">
-            <span class="case-tag">Europe</span>
-            <h3>Standard Compliance</h3>
-            <p>Premium IEC-compliant solutions for EU smart cities and retail parks.</p>
+
+    <div class="case-card" onclick="openModal('europe')">
+        <div class="case-image">
+            <img src="europe-main.jpg" alt="Europe Projects">
+            <div class="case-badge">EUROPE</div>
+        </div>
+        <div class="case-content">
+            <h3>Premium EU Solutions</h3>
+            <p>Reliable AC/DC deployments in European retail centers, fully compliant with IEC and OCPP international standards.</p>
+            <div class="btn-explore">View Detailed Cases <i class="fas fa-chevron-right"></i></div>
         </div>
     </div>
 </section>
 
 <div id="caseModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle" style="color:#002b5e; border-bottom: 2px solid #eee; padding-bottom: 10px;"></h2>
-        <div id="modalBody" class="detail-list"></div>
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalContentInner">
+            </div>
     </div>
 </div>
 
@@ -129,52 +134,105 @@
 </footer>
 
 <script>
-    const data = {
+    const caseData = {
         china: {
             title: "Success Cases in China",
-            list: [
-                { t: "Fujian Zhangzhou: Heavy-Duty Logistics Hub", d: "Deployment of 1680kW Split Charging Stacks supporting 1200A/1600A liquid-cooled ultra-fast charging for heavy trucks." },
-                { t: "TCL China Star Optoelectronics (CSOT)", d: "Comprehensive campus solution with 120x 7kW AC units and 10x 60kW DC fast chargers for staff parkings." },
-                { t: "Guizhou Tongren Public Transit", d: "Large-scale bus terminal project featuring 113x 120kW/180kW DC chargers for high-frequency urban routes." },
-                { t: "Shenzhen Middle School (Nigang Campus)", d: "Smart school parking integration with 100+ AC/DC units featuring load balancing technology." },
-                { t: "Fujian Longyan Heavy Truck Station", d: "High-power infrastructure including 320kW/360kW standalone DC chargers for industrial logistics." }
+            items: [
+                {
+                    tag: "Heavy-Duty Hub",
+                    title: "Zhangzhou, Fujian - Logistics Port",
+                    desc: "Equipped with 1680kW split charging stacks and 1600A liquid-cooled technology for ultra-fast heavy truck charging."
+                },
+                {
+                    tag: "Industrial Park",
+                    title: "TCL China Star Optoelectronics (CSOT)",
+                    desc: "Integration of 120x AC 7kW and 10x DC 60kW chargers for high-tech manufacturing facility staff."
+                },
+                {
+                    tag: "Public Transport",
+                    title: "Guizhou Tongren - Bus Electrification",
+                    desc: "Mass deployment of 113x 120kW/180kW DC dual-connector fast chargers for urban bus lines."
+                },
+                {
+                    tag: "Education Sector",
+                    title: "Shenzhen Middle School (Nigang Campus)",
+                    desc: "Smart campus solution featuring 101x AC 7kW and 9x DC 60kW charging units."
+                },
+                {
+                    tag: "Residential & Commercial",
+                    title: "Shenzhen Huaqiang City / Country Garden",
+                    desc: "Standardized residential charging infrastructure with hundreds of high-reliability AC wallboxes."
+                }
             ]
         },
         asia: {
-            title: "Success Cases in Asia",
-            list: [
-                { t: "Thailand National Highway Network", d: "Strategic 600kW Ultra-Fast Hubs installed along key intercity corridors to eliminate range anxiety." },
-                { t: "Myanmar Freight Terminal", d: "Rugged 120kW DC Fast Chargers customized for harsh environmental conditions in heavy logistics fleets." },
-                { t: "Vietnam Commercial Hub", d: "Public 60kW DC charging stations supporting local e-mobility initiatives in metropolitan areas." }
+            title: "Success Cases in Asia (Excl. China)",
+            items: [
+                {
+                    tag: "Highway Network",
+                    title: "Thailand Highway Corridor",
+                    desc: "Installation of 600kW Ultra-Fast Hubs to provide rapid charging along major inter-city routes."
+                },
+                {
+                    tag: "Logistics",
+                    title: "Myanmar Inland Freight Terminal",
+                    desc: "Robust DC fast chargers (120kW) adapted for unstable grid conditions in remote areas."
+                }
             ]
         },
         europe: {
             title: "Success Cases in Europe",
-            list: [
-                { t: "Commercial Retail Parks (EU)", d: "Fully IEC 61851 compliant 22kW AC chargers integrated with RFID billing and smart management systems." },
-                { t: "EU Smart City Public Network", d: "OCPP 1.6J integrated DC fast chargers (120kW) providing seamless roaming for municipal charging networks." },
-                { t: "Logistics Fleet Electrification", d: "Customized DC solutions for European delivery fleets requiring high reliability and 24/7 uptime." }
+            items: [
+                {
+                    tag: "Retail Centers",
+                    title: "Premium Shopping Complexes",
+                    desc: "Fully IEC-compliant 22kW AC chargers with RFID management and customized branding."
+                },
+                {
+                    tag: "Public Charging",
+                    title: "EU Smart City Project",
+                    desc: "OCPP-integrated 60kW-120kW DC fast chargers with IP54 rating for all-weather outdoor use."
+                }
             ]
         }
     };
 
-    function showCases(region) {
-        const item = data[region];
-        document.getElementById('modalTitle').innerText = item.title;
-        let html = '';
-        item.list.forEach(c => {
-            html += `<div class="detail-card"><h4>${c.t}</h4><p>${c.d}</p></div>`;
+    function openModal(region) {
+        const data = caseData[region];
+        let html = `
+            <div class="modal-header">
+                <h2>${data.title}</h2>
+            </div>
+            <div class="detail-grid">
+        `;
+        
+        data.items.forEach(item => {
+            html += `
+                <div class="detail-item">
+                    <span class="detail-tag">${item.tag}</span>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                </div>
+            `;
         });
-        document.getElementById('modalBody').innerHTML = html;
+        
+        html += `</div>`;
+        document.getElementById('modalContentInner').innerHTML = html;
         document.getElementById('caseModal').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 禁止背景滚动
     }
 
-    function closeModal() { 
-        document.getElementById('caseModal').style.display = 'none'; 
+    function closeModal() {
+        document.getElementById('caseModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
-    window.onclick = function(e) { 
-        if(e.target.className == 'modal') closeModal(); 
+    // 点击背景关闭
+    window.onclick = function(event) {
+        const modal = document.getElementById('caseModal');
+        if (event.target == modal) {
+            closeModal();
+        }
     }
 </script>
 
