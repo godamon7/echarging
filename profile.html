@@ -7,111 +7,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-        :root {
-            --primary: #002b5e;
-            --accent: #00d4ff;
-            --text-main: #1a1a1a;
-            --text-muted: #666;
-            --bg-light: #f9fbff;
-        }
-
+        :root { --primary: #002b5e; --accent: #00d4ff; --text-muted: #666; }
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: 'Inter', system-ui, sans-serif; margin: 0; color: var(--text-main); background: #fff; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; line-height: 1.6; }
 
-        /* 极简高级导航 */
+        /* 导航栏 */
         header { 
             height: 90px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 6%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee;
+            padding: 0 6%; background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #eee;
         }
-        .logo img { height: 42px; transition: transform 0.3s; }
-        .logo img:hover { transform: scale(1.05); }
+        .logo img { height: 42px; }
         .nav-links { display: flex; gap: 40px; list-style: none; }
-        .nav-links a { 
-            text-decoration: none; color: var(--primary); font-size: 14px; font-weight: 600; 
-            letter-spacing: 0.5px; position: relative; transition: 0.3s;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--accent); transition: 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-size: 14px; font-weight: 600; }
 
-        /* 黄金比例首屏 */
-        .section-hero { padding: 100px 8%; background: #fff; }
-        .identity-container { 
-            display: flex; align-items: center; gap: 80px; max-width: 1400px; margin: 0 auto;
-        }
+        /* 公司介绍 Hero Section */
+        .section-hero { padding: 80px 8%; }
+        .identity-container { display: flex; align-items: center; gap: 60px; max-width: 1400px; margin: 0 auto; }
         .identity-content { flex: 1; }
-        .identity-content .label { 
-            color: var(--accent); font-weight: 700; text-transform: uppercase; 
-            letter-spacing: 3px; font-size: 12px; margin-bottom: 20px; display: block;
-        }
-        .identity-content h1 { 
-            font-size: 3.2rem; color: var(--primary); line-height: 1.1; margin: 0 0 30px 0; 
-        }
-        .identity-content p { 
-            font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px; 
-            max-width: 600px; text-align: justify;
-        }
+        .identity-content h1 { font-size: 3rem; color: var(--primary); line-height: 1.2; margin-bottom: 25px; }
+        .identity-image { flex: 1; }
+        .identity-image img { width: 100%; box-shadow: 30px 30px 0 #f0f4f8; }
 
-        .identity-image { flex: 0.9; position: relative; }
-        .identity-image img { 
-            width: 100%; border-radius: 2px; box-shadow: 40px 40px 0 #f0f4f8; transition: 0.5s;
-        }
-
-        /* 工业数据看板 */
-        .stats-banner { 
-            background: var(--primary); padding: 80px 8%; display: flex; 
-            justify-content: space-around; color: white;
-        }
+        /* 数据看板 */
+        .stats-banner { background: var(--primary); padding: 60px 8%; display: flex; justify-content: space-around; color: white; }
         .stat-card { text-align: center; }
-        .stat-card h2 { font-size: 3rem; margin: 0; color: var(--accent); font-weight: 700; }
-        .stat-card p { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; opacity: 0.7; }
+        .stat-card h2 { font-size: 2.5rem; color: var(--accent); margin: 0; }
+        .stat-card p { font-size: 12px; text-transform: uppercase; margin-top: 5px; opacity: 0.8; }
 
-        /* 车间展示 - 艺术家画廊风格 */
-        .section-workshop { padding: 120px 0; background: var(--bg-light); }
-        .section-header { text-align: center; margin-bottom: 80px; }
-        .section-header h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
-        .section-header .divider { width: 40px; height: 4px; background: var(--accent); margin: 0 auto; }
+        /* --- 核心：2列 x 4排 物理不切图布局 --- */
+        .section-workshop { padding: 100px 0; background: #f9fbff; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap; /* 允许自动换行 */
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
 
-        .gallery-wrap { 
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; /* 无缝感设计 */
-            padding: 0 20px; max-width: 1600px; margin: 0 auto;
+        .gallery-item {
+            width: 49%; /* 确保一行只能放下两个 */
+            margin-bottom: 30px;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .gallery-box { 
-            position: relative; overflow: hidden; height: 300px; background: #000;
-        }
-        .gallery-box img { 
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        .gallery-box:hover img { transform: scale(1.1); opacity: 0.6; }
-        .gallery-box .info { 
-            position: absolute; bottom: 30px; left: 30px; color: white; opacity: 0;
-            transform: translateY(20px); transition: 0.4s;
-        }
-        .gallery-box:hover .info { opacity: 1; transform: translateY(0); }
 
-        /* 专家背景模块 */
-        .expert-section { 
-            margin: 100px 8%; padding: 80px; background: #fff; 
-            border: 1px solid #eee; display: flex; align-items: center; gap: 60px;
+        .gallery-item img {
+            /* 沿用 wow.html 的成功逻辑：禁止固定高度 */
+            width: 100% !important;
+            height: auto !important; 
+            display: block;
         }
-        .expert-icon { font-size: 4rem; color: var(--primary); opacity: 0.1; }
-        .expert-text h3 { font-size: 2rem; color: var(--primary); margin: 0 0 20px 0; }
-        .expert-text p { font-size: 1.1rem; color: var(--text-muted); font-weight: 300; }
 
-        footer { background: #050505; color: #fff; padding: 80px 8% 40px; text-align: center; }
-        .footer-logo { font-size: 24px; font-weight: 700; margin-bottom: 20px; display: block; }
-        .copy { font-size: 12px; color: #555; margin-top: 40px; border-top: 1px solid #1a1a1a; padding-top: 40px; }
+        .gallery-info { padding: 15px; font-weight: 600; color: var(--primary); border-top: 1px solid #f0f0f0; }
 
-        @media (max-width: 1024px) {
-            .identity-container { flex-direction: column; text-align: center; }
-            .identity-content p { margin: 0 auto 30px; }
-            .gallery-wrap { grid-template-columns: repeat(2, 1fr); }
-            .stats-banner { flex-wrap: wrap; gap: 40px; }
+        /* 移动端适配 */
+        @media (max-width: 800px) {
+            .gallery-item { width: 100%; }
+            .identity-container { flex-direction: column; }
         }
+
+        footer { background: #050505; color: #fff; padding: 60px 8%; text-align: center; }
     </style>
 </head>
 <body>
@@ -130,11 +90,10 @@
 <section class="section-hero">
     <div class="identity-container">
         <div class="identity-content">
-            <span class="label">Since 2014</span>
-            <h1>Powering the <br>Future of Mobility.</h1>
+            <span style="color:var(--accent); font-weight:700; font-size:12px; letter-spacing:2px;">SINCE 2014</span>
+            <h1>Powering the Future of Mobility.</h1>
             <p>ECharging New Energy is a premier high-tech enterprise dedicated to the application of sophisticated power supply systems for the global EV market.</p>
-            <p>Our foundation is built on years of technical experience inherited from industry leaders like <strong>Huawei and Emerson</strong>. This deep-rooted R&D heritage allows us to deliver products that are not only innovative but also grounded in field-proven reliability.</p>
-            <p>We provide comprehensive solutions across AC/DC charging stations, split-stack architectures, and PV-storage integration, all engineered with <strong>IP54-rated</strong> durability for the most demanding environments.</p>
+            <p>Our foundation is built on years of technical experience inherited from industry leaders like <strong>Huawei and Emerson</strong>.</p>
         </div>
         <div class="identity-image">
             <img src="company.jpg" alt="ECharging HQ">
@@ -143,43 +102,31 @@
 </section>
 
 <div class="stats-banner">
-    <div class="stat-card"><h2>1680<small style="font-size:1.5rem">kW</small></h2><p>Max Output</p></div>
-    <div class="stat-card"><h2>600<small style="font-size:1.5rem">kW</small></h2><p>Ultra-Fast Hub</p></div>
+    <div class="stat-card"><h2>1680kW</h2><p>Max Output</p></div>
+    <div class="stat-card"><h2>600kW</h2><p>Ultra-Fast Hub</p></div>
     <div class="stat-card"><h2>IP54</h2><p>Protection Level</p></div>
-    <div class="stat-card"><h2>100+</h2><p>Patents Held</p></div>
 </div>
 
 <section class="section-workshop">
     <div class="section-header">
         <h2>Manufacturing Excellence</h2>
-        <div class="divider"></div>
+        <div style="width:40px; height:4px; background:var(--accent); margin:15px auto;"></div>
     </div>
     
-    <div class="gallery-wrap">
-        <div class="gallery-box"><img src="workshop1.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop2.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop3.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop4.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop5.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop6.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop7.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
-        <div class="gallery-box"><img src="workshop8.jpg"><div class="info"><h4>Workshop cornor</h4></div></div>
+    <div class="gallery-container">
+        <div class="gallery-item"><img src="workshop1.jpg"><div class="gallery-info">Workshop 01</div></div>
+        <div class="gallery-item"><img src="workshop2.jpg"><div class="gallery-info">Workshop 02</div></div>
+        <div class="gallery-item"><img src="workshop3.jpg"><div class="gallery-info">Workshop 03</div></div>
+        <div class="gallery-item"><img src="workshop4.jpg"><div class="gallery-info">Workshop 04</div></div>
+        <div class="gallery-item"><img src="workshop5.jpg"><div class="gallery-info">Workshop 05</div></div>
+        <div class="gallery-item"><img src="workshop6.jpg"><div class="gallery-info">Workshop 06</div></div>
+        <div class="gallery-item"><img src="workshop7.jpg"><div class="gallery-info">Workshop 07</div></div>
+        <div class="gallery-item"><img src="workshop8.jpg"><div class="gallery-info">Workshop 08</div></div>
     </div>
 </section>
 
-<div class="expert-section">
-    <div class="expert-icon"><i class="fas fa-microchip"></i></div>
-    <div class="expert-text">
-        <h3>A Legacy of Expertise</h3>
-        <p>With more cutting-edge specifications and deeper expertise, we innovatively fulfill customers' visions.
-We join hands with all to build a new energy world of limitless possibilities.</p>
-    </div>
-</div>
-
 <footer>
-    <span class="footer-logo">ECharging</span>
-    <p>ECharging New Energy (Shenzhen) Co., Ltd.<br>Building top-tier power supplies for a cleaner planet.</p>
-    <div class="copy">&copy; 2026 ECharging. All Rights Reserved.</div>
+    <p>&copy; 2026 ECharging New Energy. All Rights Reserved.</p>
 </footer>
 
 </body>
