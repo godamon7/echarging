@@ -34,18 +34,15 @@
 
         .product-section { padding: 100px 0 80px 0; border-bottom: 1px solid #eee; }
         .product-section:nth-child(even) { background: #f9fbff; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 60px; align-items: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 60px; align-items: flex-start; } 
         .reverse { flex-direction: row-reverse; }
 
-        .product-image { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .product-image { flex: 1; text-align: center; position: sticky; top: 120px; }
         .product-image img { 
             max-width: 100%; 
             max-height: 420px; 
-            height: auto; 
-            width: auto;
             border-radius: 12px; 
             filter: drop-shadow(0 15px 35px rgba(0,0,0,0.1)); 
-            transition: transform 0.4s ease;
         }
         
         .product-info { flex: 1.2; }
@@ -58,17 +55,13 @@
         }
         .tech-highlight ul { margin: 0; padding-left: 20px; }
 
-        .spec-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .spec-table td { padding: 12px 18px; border-bottom: 1px solid #eee; font-size: 14px; }
-        .spec-label { font-weight: bold; color: #002b5e; width: 35%; background: #f4f7f9; }
+        .specs-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .specs-table th { background: #eef2f6; text-align: left; padding: 12px 20px; font-size: 13px; color: #002b5e; border-top: 1px solid #eee; }
+        .specs-table td { padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .specs-table td:first-child { font-weight: bold; color: #555; width: 40%; background: #fafafa; }
 
-        /* 标准展示区样式 */
         .standard-box { 
-            margin-top: 15px; 
-            padding: 12px; 
-            background: #fdfdfd; 
-            border: 1px dashed #ccc; 
-            border-radius: 6px;
+            margin-top: 15px; padding: 12px; background: #fdfdfd; border: 1px dashed #ccc; border-radius: 6px;
         }
         .standard-title { font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase; margin-bottom: 5px; display: block; }
         .standard-text { font-size: 11.5px; color: #777; line-height: 1.4; display: block; }
@@ -81,6 +74,7 @@
             }
             .nav-links.active { right: 0; }
             .container, .reverse { flex-direction: column !important; text-align: center; gap: 30px; }
+            .product-image { position: static; }
         }
 
         footer { background: #1a1a1a; color: #ccc; padding: 40px 0; text-align: center; }
@@ -105,9 +99,10 @@
                 <a href="products.html" style="color: #00d4ff;">Products <i class="fas fa-chevron-down" style="font-size: 11px;"></i></a>
                 <ul class="dropdown-content">
                     <li><a href="products.html#ac-products">AC Chargers</a></li>
-                    <li><a href="products.html#dc-products">DC Fast Chargers</a></li>
-                    <li><a href="products.html#ultra-hub">Ultra-Fast Hub</a></li>
-                    <li><a href="products.html#split-stack">Charging Stack</a></li>
+                    <li><a href="products.html#dc-products-low">DC Chargers (60-160kW)</a></li>
+                    <li><a href="products.html#dc-products-high">DC Chargers (180-480kW)</a></li>
+                    <li><a href="products.html#ultra-hub">600kW/800kW Ultra-Fast Hub</a></li>
+                    <li><a href="products.html#split-stack">Charging Stack (1680kW)</a></li>
                 </ul>
             </li>
             <li><a href="news.html">News & Cases</a></li>
@@ -118,31 +113,52 @@
 
 <div class="page-banner">
     <h1>Our Charging Solutions</h1>
-    <p>High-reliability energy technology with Huawei & Emerson heritage.</p>
+    <p>Professional EV Infrastructure with Huawei & Emerson technical heritage.</p>
 </div>
 
 <section class="product-section" id="ac-products">
     <div class="container">
-        <div class="product-image"><img src="ac-charger.png" alt="AC Charger"></div>
+        <div class="product-image">
+            <img src="ac-charger.png" alt="AC Charger">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; color: #002b5e;">
+                <div style="font-size: 12px;"><i class="fas fa-shield-alt fa-2x"></i><br>Type A+6mA DC</div>
+                <div style="font-size: 12px;"><i class="fas fa-cloud-upload-alt fa-2x"></i><br>OCPP 1.6J</div>
+                <div style="font-size: 12px;"><i class="fas fa-mobile-alt fa-2x"></i><br>App Control</div>
+            </div>
+        </div>
         <div class="product-info">
             <span class="tag">Home & Commercial</span>
-            <h2>AC Series (7kW - 22kW)</h2>
+            <h2>Smart AC Wallbox Series</h2>
+            <p style="font-size: 14.5px; color:#555;">Compliant with global standards, supporting various connectivity modes with an ultra-wide voltage range for stable operation in any grid environment.</p>
+            
             <div class="tech-highlight">
                 <ul>
                     <li><strong>Smart:</strong> Supports remote upgrades, App control, and remote diagnosis.</li>
                     <li><strong>Safety:</strong> Type A+DC 6mA RCD protection and IP54 rated.</li>
                 </ul>
             </div>
-            <table class="spec-table">
-                <tr><td class="spec-label">Power Output</td><td>7kW / 11kW / 22kW</td></tr>
-                <tr><td class="spec-label">Interface</td><td>AC Type 2 (IEC 62196-2)</td></tr>
-                <tr><td class="spec-label">Voltage</td><td>230V / 400V VAC</td></tr>
-                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+
+            <table class="specs-table">
+                <tr><th colspan="2">INPUT & OUTPUT</th></tr>
+                <tr><td>Rated Power</td><td>7kW / 11kW / 22kW</td></tr>
+                <tr><td>Rated Input/Output Current</td><td>32A / 16A / 32A</td></tr>
+                <tr><td>Input Voltage</td><td>230VAC (1P+N+PE) / 400VAC (3P+N+PE)</td></tr>
+                <tr><td>Rated Frequency</td><td>50Hz / 60Hz</td></tr>
+                <tr><td>Cable Length</td><td>5.0m or Customized</td></tr>
+                <tr><th colspan="2">INTERFACE & CONNECTIVITY</th></tr>
+                <tr><td>Connectivity</td><td>WiFi / Bluetooth / 4G / Ethernet</td></tr>
+                <tr><td>Protocol</td><td>OCPP 1.6J (Ready for 2.0.1)</td></tr>
+                <tr><td>User Authentication</td><td>RFID Card / App / Plug & Play</td></tr>
+                <tr><th colspan="2">GENERAL CHARACTERISTICS</th></tr>
+                <tr><td>Ingress Protection</td><td>IP54 Rated</td></tr>
+                <tr><td>Working Temperature</td><td>-35°C to +50°C</td></tr>
+                <tr><td>Compliance</td><td>IEC/EN 61851-1, IEC 62196-1/2, EN 62955</td></tr>
             </table>
+
             <div class="standard-box">
                 <span class="standard-title">Compliance & Safety Standards</span>
                 <span class="standard-text">
-                    <strong>EMC:</strong> IEC61851-21-2, EN 61000-6-(1/2/3/4), EN 61000-3-(11/12), IEC61008-1/2-1, EN 62423, IEC 62196-1/2.
+                    <strong>EMC:</strong> IEC61851-21-2, EN 61000-6-(1/2/3/4), IEC61008-1/2-1, EN 62423, IEC 62196-1/2.
                     <br><strong>Safety:</strong> IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955.
                 </span>
             </div>
@@ -150,29 +166,140 @@
     </div>
 </section>
 
-<section class="product-section" id="dc-products">
-    <div class="container reverse">
-        <div class="product-image"><img src="dc-charger.png" alt="DC Fast Charger"></div>
+<section class="product-section" id="ac-products-v2">
+    <div class="container reverse"> <div class="product-image">
+            <img src="ac-charger-pro.png" alt="Smart AC Wallbox Pro">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; color: #002b5e;">
+                <div style="font-size: 12px;"><i class="fas fa-fingerprint fa-2x"></i><br>Bio-Auth</div>
+                <div style="font-size: 12px;"><i class="fas fa-wifi fa-2x"></i><br>Smart Link</div>
+                <div style="font-size: 12px;"><i class="fas fa-tools fa-2x"></i><br>Easy Install</div>
+            </div>
+        </div>
         <div class="product-info">
-            <span class="tag">Commercial & Public</span>
-            <h2>DC Fast Charger (60kW - 480kW)</h2>
+            <span class="tag">Premium Edition</span>
+            <h2>Smart AC Wallbox Series (Pro)</h2>
+            <p style="font-size: 14.5px; color:#555;">An upgraded version of our classic wallbox, featuring enhanced industrial design and advanced smart grid integration features.</p>
+            
+            <div class="tech-highlight">
+                <ul>
+                    <li><strong>Design:</strong> Sleek aesthetic with 4.3-inch LCD display.</li>
+                    <li><strong>Reliability:</strong> Enhanced cooling architecture and IP54 robust protection.</li>
+                </ul>
+            </div>
+
+            <table class="specs-table">
+                <tr><th colspan="2">INPUT & OUTPUT</th></tr>
+                <tr><td>Rated Power</td><td>7kW / 11kW / 22kW</td></tr>
+                <tr><td>Rated Input/Output Current</td><td>32A / 16A / 32A</td></tr>
+                <tr><td>Input Voltage</td><td>230VAC (1P+N+PE) / 400VAC (3P+N+PE)</td></tr>
+                <tr><td>Rated Frequency</td><td>50Hz / 60Hz</td></tr>
+                <tr><td>Cable Length</td><td>5.0m or Customized</td></tr>
+                <tr><th colspan="2">INTERFACE & CONNECTIVITY</th></tr>
+                <tr><td>Connectivity</td><td>WiFi / Bluetooth / 4G / Ethernet</td></tr>
+                <tr><td>Protocol</td><td>OCPP 1.6J (Ready for 2.0.1)</td></tr>
+                <tr><td>User Authentication</td><td>RFID Card / App / Plug & Play</td></tr>
+                <tr><th colspan="2">GENERAL CHARACTERISTICS</th></tr>
+                <tr><td>Ingress Protection</td><td>IP54 Rated</td></tr>
+                <tr><td>Working Temperature</td><td>-35°C to +50°C</td></tr>
+                <tr><td>Compliance</td><td>IEC/EN 61851-1, IEC 62196-1/2, EN 62955</td></tr>
+            </table>
+
+            <div class="standard-box">
+                <span class="standard-title">Compliance & Safety Standards</span>
+                <span class="standard-text">
+                    <strong>EMC:</strong> IEC61851-21-2, EN 61000-6-(1/2/3/4), IEC61008-1/2-1, EN 62423, IEC 62196-1/2.
+                    <br><strong>Safety:</strong> IEC/EN 61851-1, EN 62311, EN 62479, IEC/EN 62955.
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-section" id="dc-products-low">
+    <div class="container reverse">
+        <div class="product-image">
+            <img src="dc-charger-60.png" alt="DC Fast Charger">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; color: #002b5e;">
+                <div style="font-size: 12px;"><i class="fas fa-bolt fa-2x"></i><br>Dual Outlet</div>
+                <div style="font-size: 12px;"><i class="fas fa-percentage fa-2x"></i><br>Peak 96%</div>
+                <div style="font-size: 12px;"><i class="fas fa-network-wired fa-2x"></i><br>Load Balance</div>
+            </div>
+        </div>
+        <div class="product-info">
+            <span class="tag">Commercial & Fleet</span>
+            <h2>DC Fast Charger (60kW - 160kW)</h2>
             <div class="tech-highlight">
                 <ul>
                     <li><strong>Parallel Charging:</strong> Supports dual-connector parallel output.</li>
-                    <li><strong>Optimized:</strong> High-efficiency fast charging range for diverse commercial sites.</li>
-                    <li><strong>Input:</strong> Supports dual-transformer power input configuration.</li>
+                    <li><strong>Efficiency:</strong> High-efficiency fast charging optimized for commercial sites.</li>
                 </ul>
             </div>
-            <table class="spec-table">
-                <tr><td class="spec-label">Power Output</td><td>60kW - 480kW</td></tr>
-                <tr><td class="spec-label">Peak Efficiency</td><td>≥ 96%</td></tr>
-                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+
+            <table class="specs-table">
+                <tr><th colspan="2">ELECTRICAL SPECIFICATIONS</th></tr>
+                <tr><td>Rated Power</td><td>60kW / 80kW / 120kW / 160kW</td></tr>
+                <tr><td>AC Input Power Supply</td><td>91A / 121A / 182A / 243A</td></tr>
+                <tr><td>Max Output Current (CCS / NACS)</td><td>200A - 250A</td></tr>
+                <tr><td>Max Output Current (GB/T)</td><td>200A - 250A</td></tr>
+                <tr><td>Output Voltage</td><td>150V - 1000V DC (Ultra-Wide)</td></tr>
+                <tr><td>Peak Efficiency</td><td>≥ 96%</td></tr>
+                <tr><td>Input Voltage</td><td>380V / 400V / 415V AC (3P+N+PE)</td></tr>
+                <tr><th colspan="2">USER EXPERIENCE & SAFETY</th></tr>
+                <tr><td>Ingress Protection</td><td>IP54 Rated</td></tr>
+                <tr><td>Operating Temp</td><td>-30°C to +55°C</td></tr>
+                <tr><td>Communication</td><td>4G / Ethernet / OCPP 1.6J</td></tr>
             </table>
+
             <div class="standard-box">
                 <span class="standard-title">Technical Standards & EV Communication</span>
                 <span class="standard-text">
-                    <strong>Regulation:</strong> IEC 61851-21-2/23/24, IEC 61000, IEC/EN 61851-1, IEC 62196-1/3, GBT18487, GBT20234, NB/T 33008.1/33001.
-                    <br><strong>Communication:</strong> DIN 70121, ISO/IEC 15118, GBT27930, GBT 34657/34658.
+                    <strong>Regulation:</strong> IEC 61851-21-2/23/24, IEC 61000, IEC/EN 61851-1, IEC 62196-1/3.
+                    <br><strong>Communication:</strong> DIN 70121, ISO 15118, GBT 27930.
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-section" id="dc-products-high">
+    <div class="container">
+        <div class="product-image">
+            <img src="dc-charger-480.png" alt="DC Fast Charger">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; color: #002b5e;">
+                <div style="font-size: 12px;"><i class="fas fa-tachometer-alt fa-2x"></i><br>Ultra-Fast</div>
+                <div style="font-size: 12px;"><i class="fas fa-shield-virus fa-2x"></i><br>C5 Anti-corr</div>
+                <div style="font-size: 12px;"><i class="fas fa-temperature-low fa-2x"></i><br>Low Temp Stable</div>
+            </div>
+        </div>
+        <div class="product-info">
+            <span class="tag">Public Charging Hub</span>
+            <h2>DC Fast Charger (180kW - 480kW)</h2>
+            <div class="tech-highlight">
+                <ul>
+                    <li><strong>Ultra-Fast:</strong> Designed for highway service areas and high-traffic public hubs.</li>
+                    <li><strong>Input:</strong> Supports dual-transformer power input configuration.</li>
+                </ul>
+            </div>
+
+            <table class="specs-table">
+                <tr><th colspan="2">DC OUTPUT CHARACTERISTICS</th></tr>
+                <tr><td>Rated Power</td><td>180kW / 240kW / 320kW / 360kW / 480kW</td></tr>
+                <tr><td>AC Input Power Supply</td><td>294A / 392A / 522A / 588A / 783A</td></tr>
+                <tr><td>Max Output Current (CCS / NACS)</td><td>200A - 400A</td></tr>
+                <tr><td>Max Output Current (GB/T)</td><td>250A - 400A</td></tr>
+                <tr><td>Output Voltage</td><td>200V - 1000V DC</td></tr>
+                <tr><td>Max Current</td><td>Up to 600A / 800A (Liquid-cooled optional)</td></tr>
+                <tr><th colspan="2">GENERAL & MECHANICAL</th></tr>
+                <tr><td>Ingress Protection</td><td>IP54 Rated</td></tr>
+                <tr><td>Working Temperature</td><td>-35°C to +55°C (Full Load)</td></tr>
+                <tr><td>Standard Length</td><td>5m (Standard) / 7.5m (Optional)</td></tr>
+            </table>
+
+            <div class="standard-box">
+                <span class="standard-title">International Standards</span>
+                <span class="standard-text">
+                    <strong>Regulation:</strong> IEC 61851-1/23/24, IEC 61000.
+                    <br><strong>Communication:</strong> DIN 70121, ISO 15118, GBT 27930.
                 </span>
             </div>
         </div>
@@ -180,7 +307,7 @@
 </section>
 
 <section class="product-section" id="ultra-hub">
-    <div class="container">
+    <div class="container reverse">
         <div class="product-image"><img src="ultra-hub.png" alt="600kW Ultra-Fast Hub"></div>
         <div class="product-info">
             <span class="tag">Next-Gen Technology</span>
@@ -188,10 +315,15 @@
             <div class="tech-highlight">
                 <i class="fas fa-bolt"></i> Available in 600A/800A dual-connectors, supporting liquid-cooled charging for maximum performance.
             </div>
-            <table class="spec-table">
-                <tr><td class="spec-label">Max Power</td><td>600kW (Standard Unit)</td></tr>
-                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+            
+            <table class="specs-table">
+                <tr><th colspan="2">SYSTEM SPECIFICATIONS</th></tr>
+                <tr><td>Max System Power</td><td>600kW</td></tr>
+                <tr><td>Charging Interface</td><td>HPC Liquid-cooled Connector</td></tr>
+                <tr><td>Peak Efficiency</td><td>≥ 96.5%</td></tr>
+                <tr><td>Ingress Protection</td><td>IP54 Rated</td></tr>
             </table>
+
             <div class="standard-box">
                 <span class="standard-title">Compliance Standards</span>
                 <span class="standard-text">
@@ -203,28 +335,64 @@
 </section>
 
 <section class="product-section" id="split-stack">
-    <div class="container reverse">
-        <div class="product-image"><img src="charging-stack.png" alt="Split Charging Stack"></div>
+    <div class="container">
+        <div class="product-image">
+            <img src="charging-stack.png" alt="Split Charging Stack">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; color: #002b5e;">
+                <div style="font-size: 12px;"><i class="fas fa-layer-group fa-2x"></i><br>Flexible Sharing</div>
+                <div style="font-size: 12px;"><i class="fas fa-wind fa-2x"></i><br>Air/Liquid Cooling</div>
+                <div style="font-size: 12px;"><i class="fas fa-expand-arrows-alt fa-2x"></i><br>Scalable</div>
+            </div>
+        </div>
         <div class="product-info">
             <span class="tag">Scalable Infrastructure</span>
             <h2>Split Charging Stack</h2>
+            
             <div class="tech-highlight">
                 <ul>
                     <li><strong>Single Stack:</strong> 720kW individual unit power.</li>
                     <li><strong>Max System:</strong> Total power distribution up to 1680kW.</li>
-                    <li><strong>Strategy:</strong> Advanced relay-based switching strategy.</li>
                 </ul>
             </div>
-            <table class="spec-table">
-                <tr><td class="spec-label">Single Stack Power</td><td>720kW</td></tr>
-                <tr><td class="spec-label">System Total</td><td>Up to 1680kW</td></tr>
-                <tr><td class="spec-label">Protection</td><td>IP54 Rated</td></tr>
+
+            <table class="specs-table">
+                <tr><th colspan="2">POWER BANK (RECTIFIER CABINET)</th></tr>
+                <tr><td>Input Voltage</td><td>380VAC ± 15% (3W+N+PE)</td></tr>
+                <tr><td>Output Power Range</td><td>480kW / 600kW / 720kW / 800kW / 960kW</td></tr>
+                <tr><td>Output Voltage Range</td><td>200V - 1000V DC</td></tr>
+                <tr><td>Max Output Current</td><td>250A (Standard) / 600A (Super Charge)</td></tr>
+                <tr><td>Dimensions (W*D*H)</td><td>1000 x 1570 x 1800 mm</td></tr>
             </table>
+
+            <table class="specs-table">
+                <tr><th colspan="3">CHARGING TERMINAL (SATELLITE) OPTIONS</th></tr>
+                <tr style="font-size: 12px; background: #f9f9f9;">
+                    <td><strong>Type</strong></td>
+                    <td><strong>DC Fast Terminal</strong></td>
+                    <td><strong>DC Super Terminal</strong></td>
+                </tr>
+                <tr>
+                    <td>Cooling Method</td>
+                    <td>Forced Air Cooling</td>
+                    <td>Liquid Cooling</td>
+                </tr>
+                <tr>
+                    <td>Connector Type</td>
+                    <td>Dual / Single Plug</td>
+                    <td>Single Plug</td>
+                </tr>
+                <tr>
+                    <td>Power Range</td>
+                    <td>30kW - 250kW</td>
+                    <td>400kW - 600kW</td>
+                </tr>
+            </table>
+
             <div class="standard-box">
                 <span class="standard-title">Technical Standards & EV Communication</span>
                 <span class="standard-text">
-                    <strong>Regulation:</strong> IEC 61851-21-2/23/24, IEC 61000, IEC/EN 61851-1, IEC 62196-1/3, GBT18487, GBT20234.
-                    <br><strong>Communication:</strong> DIN 70121, ISO/IEC 15118, GBT27930, GBT 34657/34658.
+                    <strong>Regulation:</strong> IEC 61851-21-2/23/24, IEC/EN 61851-1, GBT18487.
+                    <br><strong>Communication:</strong> DIN 70121, ISO/IEC 15118, GBT27930.
                 </span>
             </div>
         </div>
